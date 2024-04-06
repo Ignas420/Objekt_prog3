@@ -203,7 +203,41 @@ void StudentuRusiavimas2(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinci
     for (auto i = prev(A.end()); i != A.begin(); i--) {
     if (i->VID > 5.0) {
         Nuskriaustieji.push_back(*i);
-        i = A.erase(i);
+        A.pop_back();
+        }
+    }
+    std::chrono::duration<double> diff1 = std::chrono::high_resolution_clock::now() - start1;
+    cout << "Studentu suskirstymas uztruko: " << diff1.count() << "s\n";
+    visasLaikas += diff1.count();
+
+    cout << "Visa programa " + to_string(temp) + " uztruko: " << visasLaikas << "s\n";
+
+    Isvedimas2(A, A.size(), filename);
+    Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
+}
+void StudentuRusiavimas3(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinciai, list<Mokinys> &A, list<int> &IrasuSk, string failas, int &temp)
+{
+    string filename = "nuskriaustieji" + to_string(temp) + ".txt";
+    string filename1 = "mokslinciai." + to_string(temp) + ".txt";
+    int kint;
+
+    auto start = std::chrono::high_resolution_clock::now();
+    auto st = start;
+
+    A.sort(PagalVidurki);
+
+    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
+    cout << "Studentu rusiavimas didejimo tvarka uztruko: " << diff.count() << "s\n";
+
+    visasLaikas += diff.count();
+
+    auto start1 = std::chrono::high_resolution_clock::now();
+    auto st1 = start1;
+
+    for (auto i = prev(A.end()); i != A.begin(); i--) {
+    if (i->VID > 5.0) {
+        Nuskriaustieji.push_back(*i);
+        A.pop_back();
         }
     }
     std::chrono::duration<double> diff1 = std::chrono::high_resolution_clock::now() - start1;

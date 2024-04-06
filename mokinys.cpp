@@ -159,12 +159,12 @@ void StudentuRusiavimas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Moksli
     auto start1 = chrono::high_resolution_clock::now();
     auto st1 = start1;
 
-    for (int i = 0; i < A.size(); i++)
+    for (auto &mok : A)
     {
-        if (A[i].VID > 5.0)
-            Nuskriaustieji.push_back(A[i]);
+        if (mok.VID > 5.0)
+            Nuskriaustieji.push_back(mok);
         else
-            Mokslinciai.push_back(A[i]);
+            Mokslinciai.push_back(mok);
     }
 
     chrono::duration<double> diff1 = chrono::high_resolution_clock::now() - start1;
@@ -184,6 +184,45 @@ void StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Moksl
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
+    int kint;
+
+    auto start = chrono::high_resolution_clock::now();
+    auto st = start;
+
+    sort(A.begin(), A.end(), PagalVidurki);
+
+    chrono::duration<double> diff = chrono::high_resolution_clock::now() - start;
+    cout << "Studentu rusiavimas didejimo tvarka uztruko: " << diff.count() << "s\n";
+    visasLaikas += diff.count();
+
+    auto start1 = chrono::high_resolution_clock::now();
+    auto st1 = start1;
+
+    for (auto &mok : A)
+    {
+        if (mok.VID > 5.0){
+            Nuskriaustieji.push_back(mok);
+            A.pop_back();
+        }
+    }
+
+    chrono::duration<double> diff1 = chrono::high_resolution_clock::now() - start1;
+    cout << "Studentu skirstymas uztruko: " << diff1.count() << "s\n";
+    visasLaikas += diff1.count();
+    cout << "Visa programa " + to_string(temp) + " uztruko: " << visasLaikas << "s\n";
+
+    /* sort(Mokslinciai.begin(), Mokslinciai.end(), PagalVidurki);
+    sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalVidurki); */
+
+    //cout << "~Mokslinciai~" << endl;
+    Isvedimas2(Mokslinciai, Mokslinciai.size(), filename);
+    //cout << "~Nuskriaustieji~" << endl;
+    Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
+}
+void StudentuRusiavimas3(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp)
+{
+    string filename = "nuskriaustieji" + to_string(temp) + ".txt";
+    string filename1 = "mokslinciai." + to_string(temp) + ".txt";
 
     auto start = chrono::high_resolution_clock::now();
 
@@ -193,7 +232,7 @@ void StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Moksl
     cout << "Studentu rusiavimas didejimo tvarka uztruko: " << diff.count() << "s\n";
     visasLaikas += diff.count();
 
-    auto partition_point = partition(A.begin(), A.end(), [](const Mokinys &m) { return m.VID > 5.0; });
+    auto partition_point = partition(A.begin(), A.end(), [](const Mokinys &m) { return m.VID < 5.0; });
 
     auto start1 = chrono::high_resolution_clock::now();
 

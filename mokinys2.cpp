@@ -159,12 +159,12 @@ void StudentuRusiavimas(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinc
     auto start1 = std::chrono::high_resolution_clock::now();
     auto st1 = start1;
 
-    for (int i = 0; i < A.size(); i++)
+    for (auto &mok : A)
     {
-        if (A[i].VID > 5.0)
-            Nuskriaustieji.push_back(A[i]);
+        if (mok.VID > 5.0)
+            Nuskriaustieji.push_back(mok);
         else
-            Mokslinciai.push_back(A[i]);
+            Mokslinciai.push_back(mok);
     }
 
     std::chrono::duration<double> diff1 = std::chrono::high_resolution_clock::now() - start1;
@@ -177,6 +177,41 @@ void StudentuRusiavimas(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinc
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
 void StudentuRusiavimas2(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<Mokinys> &A, deque<int> &IrasuSk, string failas, int &temp)
+{
+    string filename = "nuskriaustieji" + to_string(temp) + ".txt";
+    string filename1 = "mokslinciai." + to_string(temp) + ".txt";
+
+    int kint;
+    auto start = std::chrono::high_resolution_clock::now();
+    auto st = start;
+
+    sort(A.begin(), A.end(), PagalVidurki);
+
+    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
+    cout << "Studentu rusiavimas didejimo tvarka uztruko: " << diff.count() << "s\n";
+    visasLaikas +=diff.count();
+
+    auto start1 = std::chrono::high_resolution_clock::now();
+    auto st1 = start1;
+
+    for (int i=A.size() - 1; i >= 0; i--)
+    {
+        if (A[i].VID > 5.0){
+            Nuskriaustieji.push_back(A[i]);
+            A.pop_back();
+        }
+    }
+
+    std::chrono::duration<double> diff1 = std::chrono::high_resolution_clock::now() - start1;
+    cout << "Studentu rusiavimas uztruko: " << diff1.count() << "s\n";
+    visasLaikas += diff1.count();
+
+    cout << "Visa programa " + to_string(temp) + " uztruko: " << visasLaikas << "s\n";
+
+    Isvedimas2(A, A.size(), filename);
+    Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
+}
+void StudentuRusiavimas3(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<Mokinys> &A, deque<int> &IrasuSk, string failas, int &temp)
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";

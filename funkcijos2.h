@@ -16,5 +16,6 @@ void GeneruotiFailus(deque<Mokinys>& Nuskriaustieji, deque<Mokinys>& Mokslinciai
 void Skaitymas(deque<Mokinys>& Nuskriaustieji, deque<Mokinys>& Mokslinciai, deque<int>& IrasuSk, string failas, deque<Mokinys>& A, int& temp);
 void StudentuRusiavimas(deque<Mokinys>& Nuskriaustieji, deque<Mokinys>& Mokslinciai, deque<Mokinys>& A, deque<int>& IrasuSk, string failas, int& temp);
 void StudentuRusiavimas2(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<Mokinys> &A, deque<int> &IrasuSk, string failas, int &temp);
+void StudentuRusiavimas3(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<Mokinys> &A, deque<int> &IrasuSk, string failas, int &temp);
 
 #endif
