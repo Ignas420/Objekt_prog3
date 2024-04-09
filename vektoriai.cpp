@@ -35,8 +35,11 @@ int main()
                 Mokinys temp;
                 while (m != 0)
                 {
-                    cin >> temp.vardas >> temp.pavarde;
-                    if (!Patikrinimas(temp.vardas) || !Patikrinimas(temp.pavarde))
+                    string vardas, pavarde;
+                    cin >> vardas >> pavarde;
+                    temp.setVardas(vardas);
+                    temp.setPavarde(pavarde);
+                    if (!Patikrinimas(vardas) || !Patikrinimas(pavarde))
                     {
                         throw runtime_error("Ivestas netinkamas vardas arba pavarde!");
                         return 1;
@@ -55,7 +58,8 @@ int main()
                     {
                         int pazymys;
                         cin >> pazymys;
-                        A[i].ND.push_back(pazymys);
+                        A[i].addND(pazymys);
+
                         if (cin.fail())
                         {
                             throw runtime_error("Namu darbai turi buti skaicius!");
@@ -68,28 +72,30 @@ int main()
                         }
                     }
                     cout << "Irasykite egzamino rezultata: " << endl;
-                    cin >> A[i].egzaminas;
+                    int egzaminas;
+                    cin >> egzaminas;
+                    A[i].setEgzaminas(egzaminas);
                     if (cin.fail())
                     {
                         throw runtime_error("Pazymys turi buti skaicius!");
                         return 1;
                     }
-                    if (A[i].egzaminas < 1 || A[i].egzaminas > 10)
+                    if (egzaminas < 1 || egzaminas > 10)
                     {
                         throw runtime_error("Pazymys turi buti desimtbaleje sistemoje!");
                         return 1;
                     }
                     Vidurkis(A);
 
-                    sort(A[i].ND.begin(), A[i].ND.end());
+                    sort(A[i].getND().begin(), A[i].getND().end());
 
-                    vector<int> temp = A[i].ND;
-                    temp.push_back(A[i].egzaminas);
+                    vector<int> temp = A[i].getND();
+                    temp.push_back(A[i].getEgzaminas());
                     sort(temp.begin(), temp.end());
                     double median = temp[temp.size() / 2];
                     if (temp.size() % 2 == 0)
                         median = (temp[temp.size() / 2 - 1] + temp[temp.size() / 2]) / 2.0;
-                    A[i].MED = median;
+                    A[i].setMED(median);
                 }
             }
             else if (input2 == 'g')
@@ -106,8 +112,11 @@ int main()
                 Mokinys temp;
                 while (m != 0)
                 {
-                    cin >> temp.vardas >> temp.pavarde;
-                    if (!Patikrinimas(temp.vardas) || !Patikrinimas(temp.pavarde))
+                    string vardas, pavarde;
+                    cin >>vardas >> pavarde;
+                    temp.setVardas(vardas);
+                    temp.setPavarde(pavarde);
+                    if (!Patikrinimas(vardas) || !Patikrinimas(pavarde))
                     {
                         throw runtime_error("Ivestas netinkamas vardas arba pavarde!");
                         return 1;
@@ -125,7 +134,7 @@ int main()
                     {
                         int pazymys;
                         pazymys = (rand() % 10) + 1;
-                        A[i].ND.push_back(pazymys);
+                        A[i].addND(pazymys);
                         if (cin.fail())
                         {
                             throw runtime_error("Namu darbai turi buti skaicius!");
@@ -137,29 +146,29 @@ int main()
                             return 1;
                         }
                     }
-                    A[i].egzaminas = (rand() % 10) + 1;
+                    A[i].setEgzaminas((rand() % 10) + 1);
                     ;
                     if (cin.fail())
                     {
                         throw runtime_error("Pazymys turi buti skaicius!");
                         return 1;
                     }
-                    if (A[i].egzaminas < 1 || A[i].egzaminas > 10)
+                    if (A[i].getEgzaminas() < 1 || A[i].getEgzaminas() > 10)
                     {
                         throw runtime_error("Pazymys turi buti desimtbaleje sistemoje!");
                         return 1;
                     }
                     Vidurkis(A);
 
-                    sort(A[i].ND.begin(), A[i].ND.end());
+                    sort(A[i].getND().begin(), A[i].getND().end());
 
-                    vector<int> temp = A[i].ND;
-                    temp.push_back(A[i].egzaminas);
+                    vector<int> temp = A[i].getND();
+                    temp.push_back(A[i].getEgzaminas());
                     sort(temp.begin(), temp.end());
                     double median = temp[temp.size() / 2];
                     if (temp.size() % 2 == 0)
                         median = (temp[temp.size() / 2 - 1] + temp[temp.size() / 2]) / 2.0;
-                    A[i].MED = median;
+                    A[i].setMED(median);
                 }
             }
             else
