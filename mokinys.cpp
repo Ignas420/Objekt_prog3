@@ -1,5 +1,5 @@
 #include "mokinys.h"
-#include "funkcijos.h"
+//#include "funkcijos.h"
 
 bool Mokinys :: Patikrinimas(string kint)
 {

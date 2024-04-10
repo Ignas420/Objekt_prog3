@@ -1,5 +1,5 @@
 #include "mokinys.h"
-#include "funkcijos.h"
+//#include "funkcijos.h"
 
 auto start1 = std::chrono::high_resolution_clock::now();
 
@@ -39,7 +39,7 @@ int main()
                     cin >> vardas >> pavarde;
                     temp.setVardas(vardas);
                     temp.setPavarde(pavarde);
-                    if (!Patikrinimas(vardas) || !Patikrinimas(pavarde))
+                    if (!temp.Patikrinimas(vardas) || !temp.Patikrinimas(pavarde))
                     {
                         throw runtime_error("Ivestas netinkamas vardas arba pavarde!");
                         return 1;
@@ -85,7 +85,7 @@ int main()
                         throw runtime_error("Pazymys turi buti desimtbaleje sistemoje!");
                         return 1;
                     }
-                    Vidurkis(A);
+                    temp.Vidurkis(A);
 
                     sort(A[i].getND().begin(), A[i].getND().end());
 
@@ -116,7 +116,7 @@ int main()
                     cin >>vardas >> pavarde;
                     temp.setVardas(vardas);
                     temp.setPavarde(pavarde);
-                    if (!Patikrinimas(vardas) || !Patikrinimas(pavarde))
+                    if (!temp.Patikrinimas(vardas) || !temp.Patikrinimas(pavarde))
                     {
                         throw runtime_error("Ivestas netinkamas vardas arba pavarde!");
                         return 1;
@@ -158,7 +158,7 @@ int main()
                         throw runtime_error("Pazymys turi buti desimtbaleje sistemoje!");
                         return 1;
                     }
-                    Vidurkis(A);
+                    temp.Vidurkis(A);
 
                     sort(A[i].getND().begin(), A[i].getND().end());
 
@@ -180,6 +180,7 @@ int main()
         // SKAITYMAS
         else if (input == 's')
         {
+            Mokinys kint;
             auto start1 = std::chrono::high_resolution_clock::now();
             auto st1 = start1;
             string failas;
@@ -187,7 +188,7 @@ int main()
             cout << "Iveskite 't'(taip) jei norite generuoti failus: " << endl;
             cin >> input3;
             if (input3 == 't')
-                GeneruotiFailus(Nuskriaustieji, Mokslinciai, IrasuSk, A);
+                kint.GeneruotiFailus(Nuskriaustieji, Mokslinciai, IrasuSk, A);
             //else if (input3 == 'n')
             //{
                 char kint6;
@@ -209,12 +210,12 @@ int main()
                         filename = "new_file" + to_string(i) + ".txt";
                     else
                         filename = "file" + to_string(i) + ".txt";
-                    Skaitymas(Nuskriaustieji, Mokslinciai, IrasuSk, filename, A, i);
+                    kint.Skaitymas(Nuskriaustieji, Mokslinciai, IrasuSk, filename, A, i);
                 }
             //}
             //else
                 //throw runtime_error("Netinkama ivestis!");
-            Vidurkis(A);
+            kint.Vidurkis(A);
         }
         else
         {

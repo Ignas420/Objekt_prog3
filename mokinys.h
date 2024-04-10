@@ -58,7 +58,6 @@ public:
     void setMED(double med) { MED = med; }
 
     // Utility functions
-    int main();
     bool Patikrinimas(string kint);
     void Vidurkis(vector<Mokinys> & A);
     void Isvedimas(const vector<Mokinys> &A, int MOK_kiekis, string isvedimas);
