@@ -1,5 +1,5 @@
 #include "mokinys2.h"
-#include "funkcijos2.h"
+//#include "funkcijos2.h"
 
 auto start1 = std::chrono::high_resolution_clock::now();
 
@@ -35,8 +35,11 @@ int main()
                 Mokinys temp;
                 while (m != 0)
                 {
-                    cin >> temp.vardas >> temp.pavarde;
-                    if (!Patikrinimas(temp.vardas) || !Patikrinimas(temp.pavarde))
+                    string vardas, pavarde;
+                    cin >> vardas >> pavarde;
+                    temp.setVardas(vardas);
+                    temp.setPavarde(pavarde);
+                    if (!temp.Patikrinimas(vardas) || !temp.Patikrinimas(pavarde))
                     {
                         throw runtime_error("Ivestas netinkamas vardas arba pavarde!");
                         return 1;
