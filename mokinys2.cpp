@@ -1,5 +1,5 @@
 #include "mokinys2.h"
-#include "funkcijos2.h"
+//#include "funkcijos2.h"
 
 bool Patikrinimas(string kint)
 {
@@ -310,28 +310,29 @@ void Mokinys :: Isvedimas2(const deque<Mokinys> &A, int MOK_kiekis, string isved
 
 void Rikiavimas(deque<Mokinys> &Mokslinciai, deque<Mokinys> &Nuskriaustieji, deque<int> &IrasuSk)
 {
+    Mokinys temp;
     char kint;
     cout << "Pagal ka rikiuoti: varda, pavarde, vidurki, mediana?(v, p, V, m)" << endl;
     cin >> kint;
     if (kint == 'V')
     {
-        sort(Mokslinciai.begin(), Mokslinciai.end(), PagalVidurki);
-        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalVidurki);
+        sort(Mokslinciai.begin(), Mokslinciai.end(), temp.PagalVidurki);
+        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), temp.PagalVidurki);
     }
     else if (kint == 'm')
     {
-        sort(Mokslinciai.begin(), Mokslinciai.end(), PagalMediana);
-        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalMediana);
+        sort(Mokslinciai.begin(), Mokslinciai.end(), temp.PagalMediana);
+        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), temp.PagalMediana);
     }
     else if (kint == 'v')
     {
-        sort(Mokslinciai.begin(), Mokslinciai.end(), PagalVarda);
-        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalVarda);
+        sort(Mokslinciai.begin(), Mokslinciai.end(), temp.PagalVarda);
+        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), temp.PagalVarda);
     }
     else if (kint == 'p')
     {
-        sort(Mokslinciai.begin(), Mokslinciai.end(), PagalPavarde);
-        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalPavarde);
+        sort(Mokslinciai.begin(), Mokslinciai.end(), temp.PagalPavarde);
+        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), temp.PagalPavarde);
     }
     else
         throw runtime_error("Netinkama ivestis!");
