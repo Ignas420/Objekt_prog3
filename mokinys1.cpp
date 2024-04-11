@@ -1,5 +1,5 @@
 #include "mokinys1.h"
-#include "funkcijos1.h"
+//#include "funkcijos1.h"
 
 bool Patikrinimas(string kint)
 {
@@ -313,28 +313,29 @@ void Mokinys ::  Isvedimas2(const list<Mokinys> &A, int MOK_kiekis, string isved
 
 void Rikiavimas(list<Mokinys> &Mokslinciai, list<Mokinys> &Nuskriaustieji, list<int> &IrasuSk)
 {
+    Mokinys temp;
     char kint;
     cout << "Pagal ka rikiuoti: varda, pavarde, vidurki, mediana?(v, p, V, m)" << endl;
     cin >> kint;
     if (kint == 'V')
     {
-        Mokslinciai.sort(PagalVidurki);
-        Nuskriaustieji.sort(PagalVidurki);
+        Mokslinciai.sort(temp.PagalVidurki);
+        Nuskriaustieji.sort(temp.PagalVidurki);
     }
     else if (kint == 'm')
     {
-        Mokslinciai.sort(PagalMediana);
-        Nuskriaustieji.sort(PagalMediana);
+        Mokslinciai.sort(temp.PagalMediana);
+        Nuskriaustieji.sort(temp.PagalMediana);
     }
     else if (kint == 'v')
     {
-        Mokslinciai.sort(PagalVarda);
-        Nuskriaustieji.sort(PagalVarda);
+        Mokslinciai.sort(temp.PagalVarda);
+        Nuskriaustieji.sort(temp.PagalVarda);
     }
     else if (kint == 'p')
     {
-        Mokslinciai.sort(PagalPavarde);
-        Nuskriaustieji.sort(PagalPavarde);
+        Mokslinciai.sort(temp.PagalPavarde);
+        Nuskriaustieji.sort(temp.PagalPavarde);
     }
     else
         throw runtime_error("Netinkama ivestis!");
