@@ -40,6 +40,8 @@ public:
     // Constructor
     Mokinys() : egzaminas(0), VID(0), MED(0) {}
 
+    ~Mokinys(){}
+
     // Getter functions
     string getVardas() const { return vardas; }
     string getPavarde() const { return pavarde; }
