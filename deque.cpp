@@ -1,5 +1,5 @@
 #include "mokinys2.h"
-//#include "funkcijos2.h"
+#include "funkcijos2.h"
 
 auto start1 = std::chrono::high_resolution_clock::now();
 
@@ -39,7 +39,7 @@ int main()
                     cin >> vardas >> pavarde;
                     temp.setVardas(vardas);
                     temp.setPavarde(pavarde);
-                    if (!temp.Patikrinimas(vardas) || !temp.Patikrinimas(pavarde))
+                    if (!Patikrinimas(vardas) || !Patikrinimas(pavarde))
                     {
                         throw runtime_error("Ivestas netinkamas vardas arba pavarde!");
                         return 1;
@@ -58,7 +58,7 @@ int main()
                     {
                         int pazymys;
                         cin >> pazymys;
-                        A[i].ND.push_back(pazymys);
+                        A[i].addND(pazymys);
                         if (cin.fail())
                         {
                             throw runtime_error("Namu darbai turi buti skaicius!");
@@ -71,28 +71,30 @@ int main()
                         }
                     }
                     cout << "Irasykite egzamino rezultata: " << endl;
-                    cin >> A[i].egzaminas;
+                    int egzaminas;
+                    cin >> egzaminas;
+                    A[i].setEgzaminas(egzaminas);
                     if (cin.fail())
                     {
                         throw runtime_error("Pazymys turi buti skaicius!");
                         return 1;
                     }
-                    if (A[i].egzaminas < 1 || A[i].egzaminas > 10)
+                    if (egzaminas < 1 || egzaminas > 10)
                     {
                         throw runtime_error("Pazymys turi buti desimtbaleje sistemoje!");
                         return 1;
                     }
-                    Vidurkis(A);
+                    temp.Vidurkis(A);
 
-                    sort(A[i].ND.begin(), A[i].ND.end());
+                    sort(A[i].getND().begin(), A[i].getND().end());
 
-                    deque<int> temp = A[i].ND;
-                    temp.push_back(A[i].egzaminas);
+                    deque<int> temp = A[i].getND();
+                    temp.push_back(A[i].getEgzaminas());
                     sort(temp.begin(), temp.end());
                     double median = temp[temp.size() / 2];
                     if (temp.size() % 2 == 0)
                         median = (temp[temp.size() / 2 - 1] + temp[temp.size() / 2]) / 2.0;
-                    A[i].MED = median;
+                    A[i].setMED(median);
                 }
             }
             else if (input2 == 'g')
@@ -109,8 +111,11 @@ int main()
                 Mokinys temp;
                 while (m != 0)
                 {
-                    cin >> temp.vardas >> temp.pavarde;
-                    if (!Patikrinimas(temp.vardas) || !Patikrinimas(temp.pavarde))
+                    string vardas, pavarde;
+                    cin >> vardas >> pavarde;
+                    temp.setVardas(vardas);
+                    temp.setPavarde(pavarde);
+                    if (!Patikrinimas(vardas) || !Patikrinimas(pavarde))
                     {
                         throw runtime_error("Ivestas netinkamas vardas arba pavarde!");
                         return 1;
@@ -128,7 +133,7 @@ int main()
                     {
                         int pazymys;
                         pazymys = (rand() % 10) + 1;
-                        A[i].ND.push_back(pazymys);
+                        A[i].getND().push_back(pazymys);
                         if (cin.fail())
                         {
                             throw runtime_error("Namu darbai turi buti skaicius!");
@@ -140,29 +145,29 @@ int main()
                             return 1;
                         }
                     }
-                    A[i].egzaminas = (rand() % 10) + 1;
-                    ;
+                    int egzaminas = (rand() % 10) + 1;
+                    A[i].setEgzaminas(egzaminas);
                     if (cin.fail())
                     {
                         throw runtime_error("Pazymys turi buti skaicius!");
                         return 1;
                     }
-                    if (A[i].egzaminas < 1 || A[i].egzaminas > 10)
+                    if (egzaminas < 1 || egzaminas > 10)
                     {
                         throw runtime_error("Pazymys turi buti desimtbaleje sistemoje!");
                         return 1;
                     }
-                    Vidurkis(A);
+                    temp.Vidurkis(A);
 
-                    sort(A[i].ND.begin(), A[i].ND.end());
+                    sort(A[i].getND().begin(), A[i].getND().end());
 
-                    deque<int> temp = A[i].ND;
-                    temp.push_back(A[i].egzaminas);
+                    deque<int> temp = A[i].getND();
+                    temp.push_back(A[i].getEgzaminas());
                     sort(temp.begin(), temp.end());
                     double median = temp[temp.size() / 2];
                     if (temp.size() % 2 == 0)
                         median = (temp[temp.size() / 2 - 1] + temp[temp.size() / 2]) / 2.0;
-                    A[i].MED = median;
+                    A[i].setMED(median);
                 }
             }
             else
@@ -174,10 +179,11 @@ int main()
         // SKAITYMAS
         else if (input == 's')
         {
+            Mokinys temp;
             auto start1 = std::chrono::high_resolution_clock::now();
             auto st1 = start1;
             string failas;
-            int temp;
+
             cout << "Iveskite 't'(taip) jei norite generuoti failus: " << endl;
             cin >> input3;
             if (input3 == 't')
@@ -185,7 +191,7 @@ int main()
                 
                 int kint5;
                 string filename;
-                char kint6;
+                char kint6, kint7;
 
                 cout << "Norite skaityti naujus ar senus failus?(n/s): " << endl;
                 cin >> kint6;
@@ -197,14 +203,19 @@ int main()
                 if(cin.fail())
                     throw runtime_error("Netinkama ivestis!");
                 
+                cout << "Kuria strategija norite rusiuoti?(1/2/3): " <<endl;
+                cin >> kint7;
+                if(kint7 != '1' && kint7 != '2' && kint7 != '3')
+                    throw runtime_error("Netinkama ivestis!");
+                
                 for(int i=0; i<kint5; i++){
                     if(kint6 == 'n')
                         filename = "new_file" + to_string(i) + ".txt";
                     else
                         filename = "file" + to_string(i) + ".txt";
-                    Skaitymas(Nuskriaustieji, Mokslinciai, IrasuSk, filename, A, i);
+                    temp.Skaitymas(Nuskriaustieji, Mokslinciai, IrasuSk, filename, A, i, kint7);
                 }
-            Vidurkis(A);
+            temp.Vidurkis(A);
         }
         else
         {

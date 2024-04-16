@@ -1,7 +1,7 @@
 #include "mokinys.h"
-//#include "funkcijos.h"
+#include "funkcijos.h"
 
-bool Mokinys :: Patikrinimas(string kint)
+bool Patikrinimas(string kint)
 {
     const int ilgis = kint.length();
     char *temp_array = new char[ilgis + 1];
@@ -52,7 +52,7 @@ bool Mokinys :: PagalPavarde(const Mokinys &a, const Mokinys &b)
 }
 
 double visasLaikas = 0.0;
-void Mokinys :: GeneruotiFailus(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<int> &IrasuSk, vector<Mokinys> &A)
+void GeneruotiFailus(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<int> &IrasuSk, vector<Mokinys> &A)
 {
     srand(time(NULL));
 
@@ -92,7 +92,7 @@ void Mokinys :: GeneruotiFailus(vector<Mokinys> &Nuskriaustieji, vector<Mokinys>
         //Skaitymas(Nuskriaustieji, Mokslinciai, IrasuSk, filename, A, i);
     }
 }
-void Mokinys :: Skaitymas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<int> &IrasuSk, string failas, vector<Mokinys> &A, int &temp)
+void Mokinys :: Skaitymas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<int> &IrasuSk, string failas, vector<Mokinys> &A, int &temp, char strategija)
 {
     visasLaikas = 0.0;
     string eil;
@@ -137,7 +137,12 @@ void Mokinys :: Skaitymas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Moks
     visasLaikas += diff.count();
 
     Vidurkis(A);
-    StudentuRusiavimas2(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
+    if(strategija == '1')
+        StudentuRusiavimas(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
+    else if(strategija == '2')
+        StudentuRusiavimas2(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
+    else if(strategija == '3')
+        StudentuRusiavimas3(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
 
     cout << endl;
 }
@@ -215,7 +220,7 @@ void Mokinys :: StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Moki
     sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalVidurki); */
 
     //cout << "~Mokslinciai~" << endl;
-    Isvedimas2(Mokslinciai, Mokslinciai.size(), filename);
+    Isvedimas2(A, A.size(), filename);
     //cout << "~Nuskriaustieji~" << endl;
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }

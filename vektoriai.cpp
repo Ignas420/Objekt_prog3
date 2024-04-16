@@ -1,5 +1,5 @@
 #include "mokinys.h"
-//#include "funkcijos.h"
+#include "funkcijos.h"
 
 auto start1 = std::chrono::high_resolution_clock::now();
 
@@ -39,7 +39,7 @@ int main()
                     cin >> vardas >> pavarde;
                     temp.setVardas(vardas);
                     temp.setPavarde(pavarde);
-                    if (!temp.Patikrinimas(vardas) || !temp.Patikrinimas(pavarde))
+                    if (!Patikrinimas(vardas) || !Patikrinimas(pavarde))
                     {
                         throw runtime_error("Ivestas netinkamas vardas arba pavarde!");
                         return 1;
@@ -59,7 +59,6 @@ int main()
                         int pazymys;
                         cin >> pazymys;
                         A[i].addND(pazymys);
-
                         if (cin.fail())
                         {
                             throw runtime_error("Namu darbai turi buti skaicius!");
@@ -113,10 +112,10 @@ int main()
                 while (m != 0)
                 {
                     string vardas, pavarde;
-                    cin >>vardas >> pavarde;
+                    cin >> vardas >> pavarde;
                     temp.setVardas(vardas);
                     temp.setPavarde(pavarde);
-                    if (!temp.Patikrinimas(vardas) || !temp.Patikrinimas(pavarde))
+                    if (!Patikrinimas(vardas) || !Patikrinimas(pavarde))
                     {
                         throw runtime_error("Ivestas netinkamas vardas arba pavarde!");
                         return 1;
@@ -146,14 +145,15 @@ int main()
                             return 1;
                         }
                     }
-                    A[i].setEgzaminas((rand() % 10) + 1);
-                    ;
+                    int egzaminas;
+                    egzaminas = (rand() % 10) + 1;
+                    A[i].setEgzaminas(egzaminas);
                     if (cin.fail())
                     {
                         throw runtime_error("Pazymys turi buti skaicius!");
                         return 1;
                     }
-                    if (A[i].getEgzaminas() < 1 || A[i].getEgzaminas() > 10)
+                    if (egzaminas < 1 || egzaminas > 10)
                     {
                         throw runtime_error("Pazymys turi buti desimtbaleje sistemoje!");
                         return 1;
@@ -180,18 +180,17 @@ int main()
         // SKAITYMAS
         else if (input == 's')
         {
-            Mokinys kint;
+            Mokinys temp;
             auto start1 = std::chrono::high_resolution_clock::now();
             auto st1 = start1;
             string failas;
-            int temp;
             cout << "Iveskite 't'(taip) jei norite generuoti failus: " << endl;
             cin >> input3;
             if (input3 == 't')
-                kint.GeneruotiFailus(Nuskriaustieji, Mokslinciai, IrasuSk, A);
+                GeneruotiFailus(Nuskriaustieji, Mokslinciai, IrasuSk, A);
             //else if (input3 == 'n')
             //{
-                char kint6;
+                char kint6, kint7;
                 int kint5;
                 string filename;
 
@@ -204,18 +203,23 @@ int main()
                 cin >> kint5;
                 if(cin.fail())
                     throw runtime_error("Netinkama ivestis!");
+                
+                cout << "Kuria strategija norite rusiuoti?(1/2/3): " <<endl;
+                cin >> kint7;
+                if(kint7 != '1' && kint7 != '2' && kint7 != '3')
+                    throw runtime_error("Netinkama ivestis!");
 
                 for(int i=0; i<kint5; i++){
                     if(kint6 == 'n')
                         filename = "new_file" + to_string(i) + ".txt";
                     else
                         filename = "file" + to_string(i) + ".txt";
-                    kint.Skaitymas(Nuskriaustieji, Mokslinciai, IrasuSk, filename, A, i);
+                    temp.Skaitymas(Nuskriaustieji, Mokslinciai, IrasuSk, filename, A, i, kint7);
                 }
             //}
             //else
                 //throw runtime_error("Netinkama ivestis!");
-            kint.Vidurkis(A);
+            temp.Vidurkis(A);
         }
         else
         {

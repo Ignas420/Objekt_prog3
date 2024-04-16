@@ -1,5 +1,5 @@
 #include "mokinys1.h"
-//#include "funkcijos1.h"
+#include "funkcijos1.h"
 
 bool Patikrinimas(string kint)
 {
@@ -30,22 +30,22 @@ void Mokinys :: Vidurkis(list<Mokinys> &A)
     }
 }
 
-bool Mokinys :: PagalVidurki(const Mokinys &a, const Mokinys &b)
+bool Mokinys ::  PagalVidurki(const Mokinys &a, const Mokinys &b)
 {
     return a.VID < b.VID;
 }
 
-bool Mokinys :: PagalMediana(const Mokinys &a, const Mokinys &b)
+bool Mokinys ::  PagalMediana(const Mokinys &a, const Mokinys &b)
 {
     return a.MED < b.MED;
 }
 
-bool Mokinys :: PagalVarda(const Mokinys &a, const Mokinys &b)
+bool Mokinys ::  PagalVarda(const Mokinys &a, const Mokinys &b)
 {
     return a.vardas < b.vardas;
 }
 
-bool Mokinys :: PagalPavarde(const Mokinys &a, const Mokinys &b)
+bool Mokinys ::  PagalPavarde(const Mokinys &a, const Mokinys &b)
 {
     return a.pavarde < b.pavarde;
 }
@@ -90,7 +90,7 @@ void GeneruotiFailus(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinciai, 
     }
 }
 
-void Mokinys :: Skaitymas(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinciai, list<int> &IrasuSk, string failas, list<Mokinys> &A, int &temp)
+void Mokinys ::  Skaitymas(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinciai, list<int> &IrasuSk, string failas, list<Mokinys> &A, int &temp, char strategija)
 {
     visasLaikas = 0.0;
     auto start1 = std::chrono::high_resolution_clock::now();
@@ -140,12 +140,17 @@ void Mokinys :: Skaitymas(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinc
     cout << "Nuskaitymo laikas: " << diff.count() << "s\n";
     visasLaikas += diff.count();
     Vidurkis(A);
-    StudentuRusiavimas(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
+    if (strategija == '1')
+        StudentuRusiavimas(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
+    if (strategija == '2')
+        StudentuRusiavimas2(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
+    if (strategija == '3')
+        StudentuRusiavimas3(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
 
     cout << endl;
 }
 
-void Mokinys :: StudentuRusiavimas(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinciai, list<Mokinys> &A, list<int> &IrasuSk, string failas, int &temp)
+void Mokinys ::  StudentuRusiavimas(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinciai, list<Mokinys> &A, list<int> &IrasuSk, string failas, int &temp)
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
@@ -181,7 +186,7 @@ void Mokinys :: StudentuRusiavimas(list<Mokinys> &Nuskriaustieji, list<Mokinys> 
     Isvedimas2(Mokslinciai, Mokslinciai.size(), filename);
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
-void Mokinys :: StudentuRusiavimas2(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinciai, list<Mokinys> &A, list<int> &IrasuSk, string failas, int &temp)
+void Mokinys ::  StudentuRusiavimas2(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinciai, list<Mokinys> &A, list<int> &IrasuSk, string failas, int &temp)
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
@@ -200,10 +205,12 @@ void Mokinys :: StudentuRusiavimas2(list<Mokinys> &Nuskriaustieji, list<Mokinys>
     auto start1 = std::chrono::high_resolution_clock::now();
     auto st1 = start1;
 
-    for (auto i = prev(A.end()); i != A.begin(); i--) {
-    if (i->VID > 5.0) {
-        Nuskriaustieji.push_back(*i);
-        A.pop_back();
+    for (auto i = prev(A.end()); i != A.begin(); i--)
+    {
+        if (i->VID > 5.0)
+        {
+            Nuskriaustieji.push_back(*i);
+            i = A.erase(i);
         }
     }
     std::chrono::duration<double> diff1 = std::chrono::high_resolution_clock::now() - start1;
@@ -215,41 +222,35 @@ void Mokinys :: StudentuRusiavimas2(list<Mokinys> &Nuskriaustieji, list<Mokinys>
     Isvedimas2(A, A.size(), filename);
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
-void Mokinys :: StudentuRusiavimas3(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinciai, list<Mokinys> &A, list<int> &IrasuSk, string failas, int &temp)
+void Mokinys ::  StudentuRusiavimas3(list<Mokinys> &Nuskriaustieji, list<Mokinys> &Mokslinciai, list<Mokinys> &A, list<int> &IrasuSk, string failas, int &temp)
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
-    int kint;
 
-    auto start = std::chrono::high_resolution_clock::now();
-    auto st = start;
+    auto start = chrono::high_resolution_clock::now();
 
     A.sort(PagalVidurki);
 
-    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
+    chrono::duration<double> diff = chrono::high_resolution_clock::now() - start;
     cout << "Studentu rusiavimas didejimo tvarka uztruko: " << diff.count() << "s\n";
 
-    visasLaikas += diff.count();
+    auto start1 = chrono::high_resolution_clock::now();
 
-    auto start1 = std::chrono::high_resolution_clock::now();
-    auto st1 = start1;
+    auto nuskriaustieji_end = partition(A.begin(), A.end(), [](const Mokinys &mok)
+                                        { return mok.VID > 5.0; });
 
-    for (auto i = prev(A.end()); i != A.begin(); i--) {
-    if (i->VID > 5.0) {
-        Nuskriaustieji.push_back(*i);
-        A.pop_back();
-        }
-    }
-    std::chrono::duration<double> diff1 = std::chrono::high_resolution_clock::now() - start1;
+    copy(A.begin(), nuskriaustieji_end, back_inserter(Nuskriaustieji));
+    copy(nuskriaustieji_end, A.end(), back_inserter(Mokslinciai));
+
+    chrono::duration<double> diff1 = chrono::high_resolution_clock::now() - start1;
     cout << "Studentu suskirstymas uztruko: " << diff1.count() << "s\n";
-    visasLaikas += diff1.count();
 
-    cout << "Visa programa " + to_string(temp) + " uztruko: " << visasLaikas << "s\n";
+    cout << "Visa programa " + to_string(temp) + " uztruko: " << diff.count() + diff1.count() << "s\n";
 
-    Isvedimas2(A, A.size(), filename);
+    Isvedimas2(Mokslinciai, Mokslinciai.size(), filename);
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
-void Mokinys :: Isvedimas(const list<Mokinys> &A, int MOK_kiekis, string isvedimas)
+void Mokinys ::  Isvedimas(const list<Mokinys> &A, int MOK_kiekis, string isvedimas)
 {
     char kint;
     cout << "Rezultatus matyti norite ekrane ar faile?(e/f): ";
@@ -294,8 +295,8 @@ void Mokinys :: Isvedimas(const list<Mokinys> &A, int MOK_kiekis, string isvedim
 
 void Mokinys ::  Isvedimas2(const list<Mokinys> &A, int MOK_kiekis, string isvedimas)
 {
-  /*   auto start = std::chrono::high_resolution_clock::now();
-    auto st = start; */
+    /*   auto start = std::chrono::high_resolution_clock::now();
+      auto st = start; */
     ofstream fr(isvedimas);
     fr << setw(20) << left << "Vardas" << setw(20) << left << "Pavarde" << setw(20) << right << "Galutinis (Vid.) / Galutinis(Med.)" << endl;
     fr << setfill('-') << setw(80) << " " << endl;
@@ -307,35 +308,34 @@ void Mokinys ::  Isvedimas2(const list<Mokinys> &A, int MOK_kiekis, string isved
         fr << endl;
     }
     fr.close();
-  /*   std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
-    cout << "Studentu isvedimas i failus uztruko: " << diff.count() << "s\n"; */
+    /*   std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
+      cout << "Studentu isvedimas i failus uztruko: " << diff.count() << "s\n"; */
 }
 
-void Rikiavimas(list<Mokinys> &Mokslinciai, list<Mokinys> &Nuskriaustieji, list<int> &IrasuSk)
+void Mokinys ::  Rikiavimas(list<Mokinys> &Mokslinciai, list<Mokinys> &Nuskriaustieji, list<int> &IrasuSk)
 {
-    Mokinys temp;
     char kint;
     cout << "Pagal ka rikiuoti: varda, pavarde, vidurki, mediana?(v, p, V, m)" << endl;
     cin >> kint;
     if (kint == 'V')
     {
-        Mokslinciai.sort(temp.PagalVidurki);
-        Nuskriaustieji.sort(temp.PagalVidurki);
+        Mokslinciai.sort(PagalVidurki);
+        Nuskriaustieji.sort(PagalVidurki);
     }
     else if (kint == 'm')
     {
-        Mokslinciai.sort(temp.PagalMediana);
-        Nuskriaustieji.sort(temp.PagalMediana);
+        Mokslinciai.sort(PagalMediana);
+        Nuskriaustieji.sort(PagalMediana);
     }
     else if (kint == 'v')
     {
-        Mokslinciai.sort(temp.PagalVarda);
-        Nuskriaustieji.sort(temp.PagalVarda);
+        Mokslinciai.sort(PagalVarda);
+        Nuskriaustieji.sort(PagalVarda);
     }
     else if (kint == 'p')
     {
-        Mokslinciai.sort(temp.PagalPavarde);
-        Nuskriaustieji.sort(temp.PagalPavarde);
+        Mokslinciai.sort(PagalPavarde);
+        Nuskriaustieji.sort(PagalPavarde);
     }
     else
         throw runtime_error("Netinkama ivestis!");

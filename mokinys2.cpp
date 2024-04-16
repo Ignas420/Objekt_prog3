@@ -1,5 +1,5 @@
 #include "mokinys2.h"
-//#include "funkcijos2.h"
+#include "funkcijos2.h"
 
 bool Patikrinimas(string kint)
 {
@@ -31,12 +31,12 @@ void Mokinys :: Vidurkis(deque<Mokinys> &A)
     }
 }
 
-bool Mokinys :: PagalVidurki(const Mokinys &a, const Mokinys &b)
+bool Mokinys ::  PagalVidurki(const Mokinys &a, const Mokinys &b)
 {
     return a.VID < b.VID;
 }
 
-bool Mokinys :: PagalMediana(const Mokinys &a, const Mokinys &b)
+bool  Mokinys ::  PagalMediana(const Mokinys &a, const Mokinys &b)
 {
     return a.MED < b.MED;
 }
@@ -46,7 +46,7 @@ bool Mokinys :: PagalVarda(const Mokinys &a, const Mokinys &b)
     return a.vardas < b.vardas;
 }
 
-bool Mokinys :: PagalPavarde(const Mokinys &a, const Mokinys &b)
+bool Mokinys ::  PagalPavarde(const Mokinys &a, const Mokinys &b)
 {
     return a.pavarde < b.pavarde;
 }
@@ -90,7 +90,7 @@ void GeneruotiFailus(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai
     }
 }
 
-void Mokinys :: Skaitymas(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<int> &IrasuSk, string failas, deque<Mokinys> &A, int &temp)
+void Mokinys :: Skaitymas(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<int> &IrasuSk, string failas, deque<Mokinys> &A, int &temp, char strategija)
 {
     visasLaikas = 0.0;
 
@@ -136,8 +136,12 @@ void Mokinys :: Skaitymas(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Moksli
     visasLaikas += diff.count();
 
     Vidurkis(A);
-    StudentuRusiavimas2(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
-
+    if (strategija == '1')
+        StudentuRusiavimas(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
+    if (strategija == '2')
+        StudentuRusiavimas2(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
+    if (strategija == '3')
+        StudentuRusiavimas3(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
     cout << endl;
 }
 
@@ -211,39 +215,33 @@ void Mokinys :: StudentuRusiavimas2(deque<Mokinys> &Nuskriaustieji, deque<Mokiny
     Isvedimas2(A, A.size(), filename);
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
-void Mokinys :: StudentuRusiavimas3(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<Mokinys> &A, deque<int> &IrasuSk, string failas, int &temp)
-{
+void Mokinys :: StudentuRusiavimas3(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<Mokinys> &A, deque<int> &IrasuSk, string failas, int &temp) {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
 
-    int kint;
-    auto start = std::chrono::high_resolution_clock::now();
-    auto st = start;
+    auto start = chrono::high_resolution_clock::now();
 
     sort(A.begin(), A.end(), PagalVidurki);
 
-    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
+    chrono::duration<double> diff = chrono::high_resolution_clock::now() - start;
     cout << "Studentu rusiavimas didejimo tvarka uztruko: " << diff.count() << "s\n";
-    visasLaikas +=diff.count();
 
-    auto start1 = std::chrono::high_resolution_clock::now();
-    auto st1 = start1;
+    auto start1 = chrono::high_resolution_clock::now();
 
-    for (int i=A.size() - 1; i >= 0; i--)
-    {
-        if (A[i].VID > 5.0){
-            Nuskriaustieji.push_back(A[i]);
-            A.pop_back();
-        }
-    }
+    auto nuskriaustieji_begin = stable_partition(A.begin(), A.end(), [](const Mokinys &mok) {
+        return mok.VID <= 5.0;
+    });
 
-    std::chrono::duration<double> diff1 = std::chrono::high_resolution_clock::now() - start1;
+    deque<Mokinys> tempDeque(make_move_iterator(nuskriaustieji_begin), make_move_iterator(A.end()));
+    A.erase(nuskriaustieji_begin, A.end());
+    Nuskriaustieji.insert(Nuskriaustieji.end(), make_move_iterator(tempDeque.begin()), make_move_iterator(tempDeque.end()));
+
+    chrono::duration<double> diff1 = chrono::high_resolution_clock::now() - start1;
     cout << "Studentu rusiavimas uztruko: " << diff1.count() << "s\n";
-    visasLaikas += diff1.count();
 
-    cout << "Visa programa " + to_string(temp) + " uztruko: " << visasLaikas << "s\n";
+    cout << "Visa programa " + to_string(temp) + " uztruko: " << diff.count() + diff1.count() << "s\n";
 
-    Isvedimas2(A, A.size(), filename);
+    Isvedimas2(Mokslinciai, Mokslinciai.size(), filename);
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
 void Mokinys :: Isvedimas(const deque<Mokinys> &A, int MOK_kiekis, string isvedimas)
@@ -308,31 +306,30 @@ void Mokinys :: Isvedimas2(const deque<Mokinys> &A, int MOK_kiekis, string isved
     cout << "Studentu isvedimas i failus uztruko: " << diff.count() << "s\n"; */
 }
 
-void Rikiavimas(deque<Mokinys> &Mokslinciai, deque<Mokinys> &Nuskriaustieji, deque<int> &IrasuSk)
+void Mokinys :: Rikiavimas(deque<Mokinys> &Mokslinciai, deque<Mokinys> &Nuskriaustieji, deque<int> &IrasuSk)
 {
-    Mokinys temp;
     char kint;
     cout << "Pagal ka rikiuoti: varda, pavarde, vidurki, mediana?(v, p, V, m)" << endl;
     cin >> kint;
     if (kint == 'V')
     {
-        sort(Mokslinciai.begin(), Mokslinciai.end(), temp.PagalVidurki);
-        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), temp.PagalVidurki);
+        sort(Mokslinciai.begin(), Mokslinciai.end(), PagalVidurki);
+        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalVidurki);
     }
     else if (kint == 'm')
     {
-        sort(Mokslinciai.begin(), Mokslinciai.end(), temp.PagalMediana);
-        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), temp.PagalMediana);
+        sort(Mokslinciai.begin(), Mokslinciai.end(), PagalMediana);
+        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalMediana);
     }
     else if (kint == 'v')
     {
-        sort(Mokslinciai.begin(), Mokslinciai.end(), temp.PagalVarda);
-        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), temp.PagalVarda);
+        sort(Mokslinciai.begin(), Mokslinciai.end(), PagalVarda);
+        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalVarda);
     }
     else if (kint == 'p')
     {
-        sort(Mokslinciai.begin(), Mokslinciai.end(), temp.PagalPavarde);
-        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), temp.PagalPavarde);
+        sort(Mokslinciai.begin(), Mokslinciai.end(), PagalPavarde);
+        sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalPavarde);
     }
     else
         throw runtime_error("Netinkama ivestis!");
