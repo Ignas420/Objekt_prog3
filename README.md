@@ -54,48 +54,11 @@ RAM: 16.0 GB 3200 MHz SODIMM
 
 Disk: SSD 477 GB
 
+**Testavimas su 100000 ir 1000000 dydzio failais naudojant Vector konteinerius bei efektyviausias strategijas**
 
-**Testavimas su 1000, 10000, 100000, 1000000, 10000000 failais, naudojant 1-aja strategija:**
-
-Vektoriai:
-
-![image](https://github.com/Ignas420/Objektinis_prog/assets/145566919/380a1e9f-6b7c-4dc9-8e7c-d06c4ad20110)
-
-List:
-
-![image](https://github.com/Ignas420/Objektinis_prog/assets/145566919/aae8a168-7f04-4a31-ae12-b957508036b1)
-
-Deque:
-
-![image](https://github.com/Ignas420/Objektinis_prog/assets/145566919/a1045c58-0f1e-4814-9e11-175733a95ecc)
-
-
-**Testavimas su 1000, 10000, 100000, 1000000, 10000000 failais, naudojant 2-aja strategija:**
-
-Vektoriai:
-
-![image](https://github.com/Ignas420/Objektinis_prog/assets/145566919/f96801b5-d68c-4f77-a380-fac2e279b547)
-
-List:
-
-![image](https://github.com/Ignas420/Objektinis_prog/assets/145566919/763aabc1-f66a-4953-8381-8c08dda67b88)
-
-Deque:
-
-![image](https://github.com/Ignas420/Objektinis_prog/assets/145566919/b69b15d0-0d41-43f6-9b6e-31be419c385f)
-
-Is rezultatu matoma, kad vektoriai gerokai pranoksta list ir deque konteinerius. List konteineriai 2 kartus pagreiteja kai yra naudojama 1-oji strategija, o deque taip pat 2 kartus pagreiteja kai yra naudojama 2-oji strategija. Nors funkcijos atliekamos su vector konteineriu yra greiciausios, taciau is rezultatu yra matoma, kad su sio tipo konteineriais efektyviau yra naudoti 2-aja strategija. 
-
-Kalbant apie skaiciavimo efektyvuma, vektoriai pranoksta list<> ir deque<> konteinerius del savo gretimos atminties paskirstymo, suteikdami greitesne prieiga prie elementu. Sarasai, nors ir siek tiek letesni, taip siulo vidutiniskai greita prieiga naudojant 1-aja strategija, palyginus su deque<> tipo konteineriais, jie igyvendinami kaip kintancio dydzio masyvai. Deque<> konteineriai yra optimizuoti efektyviam iterpimui ir istrynimui abiejuose duomenu saraso galuose, gali sukelti pertekline apkrova atsitiktinei prieigai, todel jie gali būti letesni tam tikrose operacijose.
-
-**Testavimo laikai, naudojant modifikuota 2-aja strategija su naujais algoritmais, vector<> konteineriais:**
-
-![image](https://github.com/Ignas420/Objektinis_prog/assets/145566919/8c6ec94a-22d1-4a99-a014-63680a117220)
-
-**Vidutiniu laiku skaiciavimas:**
-
-| Struktūra | Nuskaitymo vidurkis (s) | Rusiavimo didejimo tvarka vidurkis (s) | Studentu skirstymo vidurkis (s) | Visu programu veikimo vidurkis (s) |
-|-----------|--------------------------|----------------------------------------|----------------------------------|--------------------------------------|
-| Vektoriai | 12.311508784             | 5.023293878                            | 0.153422888                      | 17.4743382                           |
-| List      | 22.25321922              | 3.93077876                             | 33.29937836                      | 79.450743226                         |
-| Deque     | 13.75983258              | 24.96002994                            | 70.9988333                       | 119.66582334                         |
+| Testo tipas | Dydis (elementai) | Nuskaitymo laikas (s) | Studentu rusiavimas didejimo tvarka (s) | Studentu skirstymas (s) | Visa programa (s) |
+|-------------|-------------------|-----------------------|----------------------------------------|-------------------------|---------------------|
+| 3 strategija su strukturom | 100000 | 0.319553 | 0.141024 | 0.0175034 | 0.47808 |
+| 3 strategija su strukturom | 1000000 | 5.06984 | 1.7883 | 0.143022 | 7.00116 |
+| 2 strategija su klasem | 100000 | 0.340054 | 0.271545 | - | 0.642104 |
+| 2 strategija su klasem | 1000000 | 5.18636 | 3.56959 | 0.42957 | 9.18552 |
