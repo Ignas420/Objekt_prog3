@@ -341,7 +341,7 @@ void Mokinys ::  Rikiavimas(list<Mokinys> &Mokslinciai, list<Mokinys> &Nuskriaus
         throw runtime_error("Netinkama ivestis!");
 }
 void testConstructor(){
-    vector<int> temp{1, 2, 3, 4};
+    list<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
     assert(mok.getVardas() == "Vardenis");
     assert(mok.getPavarde() == "Pavardenis");
@@ -352,7 +352,7 @@ void testConstructor(){
     cout << "Konstruktoriaus testavimas sekmingas!"<<endl;
 }
 void testCopyConstructor(){
-    vector<int> temp{1, 2, 3, 4};
+    list<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
     Mokinys mok1=mok;
     assert(mok.getVardas() == "Vardenis");
@@ -364,7 +364,7 @@ void testCopyConstructor(){
     cout << "Copy konstruktoriaus testavimas sekmingas!"<<endl;
 }
 void testMoveConstructor(){
-    vector<int> temp{1, 2, 3, 4};
+    list<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
     Mokinys mok1=move(mok);
     assert(mok1.getVardas() == "Vardenis");
@@ -376,7 +376,7 @@ void testMoveConstructor(){
     cout << "Move konstruktoriaus testavimas sekmingas!"<<endl;
 }
 void testCopyAssignment(){
-    vector<int> temp{1, 2, 3, 4};
+    list<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
     Mokinys mok1; mok1=mok;
     assert(mok1.getVardas() == "Vardenis");
@@ -388,7 +388,7 @@ void testCopyAssignment(){
     cout << "Copy assignment testavimas sekmingas!"<<endl;
 }
 void testMoveAssignment(){
-    vector<int> temp{1, 2, 3, 4};
+    list<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
     Mokinys mok1; mok1=move(mok);
     assert(mok1.getVardas() == "Vardenis");

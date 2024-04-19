@@ -32,9 +32,80 @@ private:
 
 public:
     // Constructor
-    Mokinys() : vardas(""), pavarde(""), egzaminas(0), VID(0), MED(0) {}
+    Mokinys(string vard="", string pav="", list<int> nd={}, int e = 0, double vid = 0, double med = 0)
+        : vardas(vard), pavarde(pav), ND(nd), egzaminas(e), VID(vid), MED(med) {}
 
+    //Destructor
     ~Mokinys(){}
+
+    //Copy constructor
+    Mokinys(const Mokinys &other) : vardas(other.vardas), pavarde(other.pavarde), ND(other.ND), egzaminas(other.egzaminas), VID(other.VID), MED(other.MED){}
+
+    //Move contructor
+    Mokinys(Mokinys&& other) noexcept
+        : vardas(move(other.vardas)), pavarde(move(other.pavarde)),
+          ND(move(other.ND)), egzaminas(exchange(other.egzaminas, 0)),
+          VID(exchange(other.VID, 0)), MED(exchange(other.MED, 0)) {}
+
+    // Copy Assignment Operator
+    Mokinys& operator=(const Mokinys &other) {
+        if (this != &other) {
+            vardas = other.vardas;
+            pavarde = other.pavarde;
+            ND = other.ND;
+            egzaminas = other.egzaminas;
+            VID = other.VID;
+            MED = other.MED;
+        }
+        return *this;
+    }
+
+    // Move Assignment Operator
+    Mokinys& operator=(Mokinys&& other) noexcept {
+        if (this != &other) {
+            vardas = move(other.vardas);
+            pavarde = move(other.pavarde);
+            ND = move(other.ND);
+            egzaminas = exchange(other.egzaminas, 0);
+            VID = exchange(other.VID, 0);
+            MED = exchange(other.MED, 0);
+        }
+        return *this;
+    }
+
+    friend std::ostream& operator<<(std::ostream& fr, const Mokinys& temp1) {
+        fr << "Vardas: " << temp1.vardas << endl;
+        fr << "Pavarde: " << temp1.pavarde << endl;
+        fr << "Namu darbai: ";
+        for (int pazymys : temp1.ND) {
+            fr << pazymys << " ";
+        }
+        cout << endl;
+        fr << "Egzamino pazymys: " << temp1.egzaminas << endl;
+        fr << "Median: " << temp1.MED << endl;
+        fr << "Average: " << temp1.VID << endl;
+        return fr;
+    }
+
+    friend istream& operator>>(istream& fd, Mokinys& temp1) {
+        cout << "Iveskite varda: ";
+        fd >> temp1.vardas;
+        cout << "Iveskite pavarde: ";
+        fd >> temp1.pavarde;
+        cout << "Iveskite namu darbus: ";
+        int pazymys;
+        temp1.ND.clear();
+        while(fd >> pazymys && pazymys != 0){
+            temp1.ND.push_back(pazymys);
+        }
+        cout << "Enter exam score: ";
+        fd >> temp1.egzaminas;
+        cout << "Enter median score: ";
+        fd >> temp1.MED;
+        cout << "Enter average score: ";
+        fd >> temp1.VID;
+        return fd;
+    }
 
     // Getter functions
     string getVardas() const { return vardas; }

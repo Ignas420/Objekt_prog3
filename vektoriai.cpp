@@ -26,6 +26,7 @@ int main()
         }
         else 
             throw runtime_error("Netinkama ivestis!");
+            
         cout << "Norite ivesti ar skaityti is failo?(i/s) " << endl;
         cin >> input;
         if (input == 'i')
