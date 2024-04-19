@@ -34,8 +34,8 @@ protected:
     string pavarde;
 
 public:
+    virtual void patikrinimas() const = 0;
     Zmogus(string vard = "", string pav = "") : vardas(vard), pavarde(pav) {}
-
     virtual ~Zmogus() {}
 
 };
