@@ -8,13 +8,24 @@ int main()
     try
     {
         int n, m, kint;
-        vector<int> IrasuSk = {100000, 1000000};
+        vector<int> IrasuSk = {1000, 10000, 100000, 1000000, 10000000};
         vector<Mokinys> A;
         vector<Mokinys> Mokslinciai;
         vector<Mokinys> Nuskriaustieji;
         string eil;
-        char input, input2, input3;
-        
+        char input, input2, input3, input4;
+
+        cout << "Ar norite istestuoti konstruktorius ir assignment'us?(jei taip, irasykite 't'): " << endl;
+        cin >> input4;
+        if(input4 == 't'){
+        testConstructor();
+        testCopyConstructor();
+        testMoveConstructor();
+        testCopyAssignment();
+        testMoveAssignment();
+        }
+        else 
+            throw runtime_error("Netinkama ivestis!");
         cout << "Norite ivesti ar skaityti is failo?(i/s) " << endl;
         cin >> input;
         if (input == 'i')
