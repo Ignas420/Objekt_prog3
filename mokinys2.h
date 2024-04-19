@@ -34,13 +34,13 @@ protected:
     string pavarde;
 
 public:
-    Zmogus(string vard = "", string pav = "") : vardas(vard), pavarde(pav) {}
-
-    virtual ~Zmogus() {}
-
+    Zmogus(string vard = "", string pav = "") : vardas(move(vard)), pavarde(move(pav)) {}
+    virtual ~Zmogus() = default;
+    virtual void patikrinimas() const = 0;
 };
 
-class Mokinys : public Zmogus{
+class Mokinys : public Zmogus
+{
 private:
     /* string vardas;
     string pavarde; */
@@ -51,11 +51,13 @@ private:
 
 public:
     // Constructor
-    Mokinys(string vard = "", string pav = "", deque<int> nd = {}, int e = 0, double vid = 0, double med = 0)
+    Mokinys(string vard = "", string pav = "", deque<int> nd = {}, int e = 0, double vid = 0.0, double med = 0.0)
         : Zmogus(move(vard), move(pav)), ND(nd), egzaminas(e), VID(vid), MED(med) {}
 
     // Destructor
     ~Mokinys() {}
+
+    void patikrinimas() const override{};
 
     // Copy constructor
     Mokinys(const Mokinys &other) : Zmogus(other), ND(other.ND), egzaminas(other.egzaminas), VID(other.VID), MED(other.MED) {}
@@ -69,29 +71,23 @@ public:
     // Copy Assignment Operator
     Mokinys &operator=(const Mokinys &other)
     {
-        if (this != &other)
-        {
-            Zmogus::operator = (other);
-            ND = other.ND;
-            egzaminas = other.egzaminas;
-            VID = other.VID;
-            MED = other.MED;
-        }
+        Zmogus::operator=(other);
+        ND = other.ND;
+        egzaminas = other.egzaminas;
+        VID = other.VID;
+        MED = other.MED;
         return *this;
     }
 
     // Move Assignment Operator
     Mokinys &operator=(Mokinys &&other) noexcept
     {
-        if (this != &other)
-        {
-            vardas = move(other.vardas);
-            pavarde = move(other.pavarde);
-            ND = move(other.ND);
-            egzaminas = exchange(other.egzaminas, 0);
-            VID = exchange(other.VID, 0);
-            MED = exchange(other.MED, 0);
-        }
+        vardas = move(other.vardas);
+        pavarde = move(other.pavarde);
+        ND = move(other.ND);
+        egzaminas = exchange(other.egzaminas, 0);
+        VID = exchange(other.VID, 0);
+        MED = exchange(other.MED, 0);
         return *this;
     }
 
