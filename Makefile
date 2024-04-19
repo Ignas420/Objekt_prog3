@@ -1,6 +1,6 @@
 CC=g++
 
-CFLAGS=-c -Wall
+CFLAGS=-c -Wall -O1
 
 VEKTORIAI_SOURCES=vektoriai.cpp mokinys.cpp funkcijos.h
 LIST_SOURCES=list.cpp mokinys1.cpp funkcijos1.h

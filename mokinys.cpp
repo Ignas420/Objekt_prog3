@@ -203,10 +203,10 @@ void Mokinys :: StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Moki
     auto start1 = chrono::high_resolution_clock::now();
     auto st1 = start1;
 
-    for (auto &mok : A)
+    for (int i=A.size() - 1; i >= 0; i--)
     {
-        if (mok.VID > 5.0){
-            Nuskriaustieji.push_back(mok);
+        if (A[i].VID > 5.0){
+            Nuskriaustieji.push_back(A[i]);
             A.pop_back();
         }
     }

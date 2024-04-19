@@ -31,7 +31,7 @@ private:
 
 public:
     // Constructor
-    Mokinys() : egzaminas(0), VID(0), MED(0) {}
+    Mokinys() : vardas(""), pavarde(""), egzaminas(0), VID(0), MED(0) {}
 
     ~Mokinys(){}
 

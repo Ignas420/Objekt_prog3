@@ -8,7 +8,7 @@ int main()
     try
     {
         int n, m, kint;
-        vector<int> IrasuSk = {1000, 10000, 100000, 1000000, 10000000};
+        vector<int> IrasuSk = {100000, 1000000};
         vector<Mokinys> A;
         vector<Mokinys> Mokslinciai;
         vector<Mokinys> Nuskriaustieji;
