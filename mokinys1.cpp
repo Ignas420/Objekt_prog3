@@ -340,3 +340,62 @@ void Mokinys ::  Rikiavimas(list<Mokinys> &Mokslinciai, list<Mokinys> &Nuskriaus
     else
         throw runtime_error("Netinkama ivestis!");
 }
+void testConstructor(){
+    vector<int> temp{1, 2, 3, 4};
+    Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+    assert(mok.getVardas() == "Vardenis");
+    assert(mok.getPavarde() == "Pavardenis");
+    assert(mok.getND() == temp);
+    assert(mok.getEgzaminas() == 9);
+    assert(mok.getVID() == 8);
+    assert(mok.getMED() == 7);
+    cout << "Konstruktoriaus testavimas sekmingas!"<<endl;
+}
+void testCopyConstructor(){
+    vector<int> temp{1, 2, 3, 4};
+    Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+    Mokinys mok1=mok;
+    assert(mok.getVardas() == "Vardenis");
+    assert(mok.getPavarde() == "Pavardenis");
+    assert(mok.getND() == temp);
+    assert(mok.getEgzaminas() == 9);
+    assert(mok.getVID() == 8);
+    assert(mok.getMED() == 7);
+    cout << "Copy konstruktoriaus testavimas sekmingas!"<<endl;
+}
+void testMoveConstructor(){
+    vector<int> temp{1, 2, 3, 4};
+    Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+    Mokinys mok1=move(mok);
+    assert(mok1.getVardas() == "Vardenis");
+    assert(mok1.getPavarde() == "Pavardenis");
+    assert(mok1.getND() == temp);
+    assert(mok1.getEgzaminas() == 9);
+    assert(mok1.getVID() == 8);
+    assert(mok1.getMED() == 7);
+    cout << "Move konstruktoriaus testavimas sekmingas!"<<endl;
+}
+void testCopyAssignment(){
+    vector<int> temp{1, 2, 3, 4};
+    Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+    Mokinys mok1; mok1=mok;
+    assert(mok1.getVardas() == "Vardenis");
+    assert(mok1.getPavarde() == "Pavardenis");
+    assert(mok1.getND() == temp);
+    assert(mok1.getEgzaminas() == 9);
+    assert(mok1.getVID() == 8);
+    assert(mok1.getMED() == 7);
+    cout << "Copy assignment testavimas sekmingas!"<<endl;
+}
+void testMoveAssignment(){
+    vector<int> temp{1, 2, 3, 4};
+    Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+    Mokinys mok1; mok1=move(mok);
+    assert(mok1.getVardas() == "Vardenis");
+    assert(mok1.getPavarde() == "Pavardenis");
+    assert(mok1.getND() == temp);
+    assert(mok1.getEgzaminas() == 9);
+    assert(mok1.getVID() == 8);
+    assert(mok1.getMED() == 7);
+    cout << "Move assignment testavimas sekmingas!"<<endl;
+}

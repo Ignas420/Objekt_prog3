@@ -8,8 +8,20 @@ int main() {
         list<Mokinys> A;
         list<Mokinys> Mokslinciai;
         list<Mokinys> Nuskriaustieji;
-        char input, input2, input3;
-        Mokinys temp1; 
+        char input, input2, input3, input4;
+        Mokinys temp1;
+
+        cout << "Ar norite istestuoti konstruktorius ir assignment'us?(jei taip, irasykite 't'): " << endl;
+        cin >> input4;
+        if(input4 == 't'){
+        testConstructor();
+        testCopyConstructor();
+        testMoveConstructor();
+        testCopyAssignment();
+        testMoveAssignment();
+        }
+        else 
+            throw runtime_error("Netinkama ivestis!");
 
         cout << "Norite ivesti ar skaityti is failo?(i/s) " << endl;
         cin >> input;

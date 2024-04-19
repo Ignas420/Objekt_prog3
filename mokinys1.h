@@ -13,6 +13,7 @@
 #include <stdexcept>
 #include <deque>
 #include <cstring>
+#include <cassert>
 
 using namespace std;
 
