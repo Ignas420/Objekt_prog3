@@ -12,6 +12,7 @@
 #include <cstring>
 #include <stdexcept>
 #include <list>
+#include <deque>
 #include <cassert>
 
 using namespace std;
@@ -21,10 +22,28 @@ const char CRfv2[] = "naujas_failas.txt";
 const char CRfv3[] = "mokslinciai.txt";
 const char CRfv4[] = "nuskriaustieji.txt";
 
-class Mokinys {
-private:
+// const char CDfv[] = "kursiokai.txt";
+const char CDfv0[] = "studentai10000.txt";
+const char CDfv1[] = "studentai100000.txt";
+const char CDfv2[] = "studentai1000000.txt";
+
+class Zmogus
+{
+protected:
     string vardas;
     string pavarde;
+
+public:
+    Zmogus(string vard = "", string pav = "") : vardas(vard), pavarde(pav) {}
+
+    virtual ~Zmogus() {}
+
+};
+
+class Mokinys : public Zmogus{
+private:
+    /* string vardas;
+    string pavarde; */
     deque<int> ND;
     int egzaminas;
     double VID;
@@ -32,26 +51,27 @@ private:
 
 public:
     // Constructor
-    Mokinys(string vard="", string pav="", deque<int> nd={}, int e = 0, double vid = 0, double med = 0)
-        : vardas(vard), pavarde(pav), ND(nd), egzaminas(e), VID(vid), MED(med) {}
+    Mokinys(string vard = "", string pav = "", deque<int> nd = {}, int e = 0, double vid = 0, double med = 0)
+        : Zmogus(move(vard), move(pav)), ND(nd), egzaminas(e), VID(vid), MED(med) {}
 
-    //Destructor
-    ~Mokinys(){}
+    // Destructor
+    ~Mokinys() {}
 
-    //Copy constructor
-    Mokinys(const Mokinys &other) : vardas(other.vardas), pavarde(other.pavarde), ND(other.ND), egzaminas(other.egzaminas), VID(other.VID), MED(other.MED){}
+    // Copy constructor
+    Mokinys(const Mokinys &other) : Zmogus(other), ND(other.ND), egzaminas(other.egzaminas), VID(other.VID), MED(other.MED) {}
 
-    //Move contructor
-    Mokinys(Mokinys&& other) noexcept
-        : vardas(move(other.vardas)), pavarde(move(other.pavarde)),
+    // Move contructor
+    Mokinys(Mokinys &&other) noexcept
+        : Zmogus((move(other.vardas)), (move(other.pavarde))),
           ND(move(other.ND)), egzaminas(exchange(other.egzaminas, 0)),
           VID(exchange(other.VID, 0)), MED(exchange(other.MED, 0)) {}
 
     // Copy Assignment Operator
-    Mokinys& operator=(const Mokinys &other) {
-        if (this != &other) {
-            vardas = other.vardas;
-            pavarde = other.pavarde;
+    Mokinys &operator=(const Mokinys &other)
+    {
+        if (this != &other)
+        {
+            Zmogus::operator = (other);
             ND = other.ND;
             egzaminas = other.egzaminas;
             VID = other.VID;
@@ -61,8 +81,10 @@ public:
     }
 
     // Move Assignment Operator
-    Mokinys& operator=(Mokinys&& other) noexcept {
-        if (this != &other) {
+    Mokinys &operator=(Mokinys &&other) noexcept
+    {
+        if (this != &other)
+        {
             vardas = move(other.vardas);
             pavarde = move(other.pavarde);
             ND = move(other.ND);
@@ -73,11 +95,13 @@ public:
         return *this;
     }
 
-    friend std::ostream& operator<<(std::ostream& fr, const Mokinys& temp1) {
+    friend std::ostream &operator<<(std::ostream &fr, const Mokinys &temp1)
+    {
         fr << "Vardas: " << temp1.vardas << endl;
         fr << "Pavarde: " << temp1.pavarde << endl;
         fr << "Namu darbai: ";
-        for (int pazymys : temp1.ND) {
+        for (int pazymys : temp1.ND)
+        {
             fr << pazymys << " ";
         }
         cout << endl;
@@ -87,7 +111,8 @@ public:
         return fr;
     }
 
-    friend istream& operator>>(istream& fd, Mokinys& temp1) {
+    friend istream &operator>>(istream &fd, Mokinys &temp1)
+    {
         cout << "Iveskite varda: ";
         fd >> temp1.vardas;
         cout << "Iveskite pavarde: ";
@@ -95,7 +120,8 @@ public:
         cout << "Iveskite namu darbus: ";
         int pazymys;
         temp1.ND.clear();
-        while(fd >> pazymys && pazymys != 0){
+        while (fd >> pazymys && pazymys != 0)
+        {
             temp1.ND.push_back(pazymys);
         }
         cout << "Enter exam score: ";
@@ -125,19 +151,18 @@ public:
     void setMED(double med) { MED = med; }
 
     // Utility functions
-    void Vidurkis(deque<Mokinys> & A);
+    void Vidurkis(deque<Mokinys> &A);
     void Isvedimas(const deque<Mokinys> &A, int MOK_kiekis, string isvedimas);
     void Isvedimas2(const deque<Mokinys> &A, int MOK_kiekis, string isvedimas);
     static bool PagalVidurki(const Mokinys &a, const Mokinys &b);
     static bool PagalMediana(const Mokinys &a, const Mokinys &b);
     static bool PagalVarda(const Mokinys &a, const Mokinys &b);
     static bool PagalPavarde(const Mokinys &a, const Mokinys &b);
-    void Rikiavimas(deque<Mokinys> &Mokslinciai, deque<Mokinys> &Nuskriaustieji, deque<int> &IrasuSk);
     void Skaitymas(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<int> &IrasuSk, string failas, deque<Mokinys> &A, int &temp, char strategija);
     void StudentuRusiavimas(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<Mokinys> &A, deque<int> &IrasuSk, string failas, int &temp);
     void StudentuRusiavimas2(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<Mokinys> &A, deque<int> &IrasuSk, string failas, int &temp);
     void StudentuRusiavimas3(deque<Mokinys> &Nuskriaustieji, deque<Mokinys> &Mokslinciai, deque<Mokinys> &A, deque<int> &IrasuSk, string failas, int &temp);
+    void Rikiavimas(deque<Mokinys> &Mokslinciai, deque<Mokinys> &Nuskriaustieji, deque<int> &IrasuSk);
 };
-
 
 #endif
