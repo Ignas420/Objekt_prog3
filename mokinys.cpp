@@ -15,7 +15,7 @@ bool Patikrinimas(string kint)
     return true;
 }
 
-void Mokinys :: Vidurkis(vector<Mokinys> &A)
+void Mokinys ::Vidurkis(vector<Mokinys> &A)
 {
     for (int i = 0; i < A.size(); i++)
     {
@@ -31,22 +31,22 @@ void Mokinys :: Vidurkis(vector<Mokinys> &A)
     }
 }
 
-bool Mokinys :: PagalVidurki(const Mokinys &a, const Mokinys &b)
+bool Mokinys ::PagalVidurki(const Mokinys &a, const Mokinys &b)
 {
     return a.VID < b.VID;
 }
 
-bool Mokinys :: PagalMediana(const Mokinys &a, const Mokinys &b)
+bool Mokinys ::PagalMediana(const Mokinys &a, const Mokinys &b)
 {
     return a.MED < b.MED;
 }
 
-bool Mokinys :: PagalVarda(const Mokinys &a, const Mokinys &b)
+bool Mokinys ::PagalVarda(const Mokinys &a, const Mokinys &b)
 {
     return a.vardas < b.vardas;
 }
 
-bool Mokinys :: PagalPavarde(const Mokinys &a, const Mokinys &b)
+bool Mokinys ::PagalPavarde(const Mokinys &a, const Mokinys &b)
 {
     return a.pavarde < b.pavarde;
 }
@@ -89,10 +89,10 @@ void GeneruotiFailus(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinci
 
         /* visasLaikas += diff.count(); */
 
-        //Skaitymas(Nuskriaustieji, Mokslinciai, IrasuSk, filename, A, i);
+        // Skaitymas(Nuskriaustieji, Mokslinciai, IrasuSk, filename, A, i);
     }
 }
-void Mokinys :: Skaitymas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<int> &IrasuSk, string failas, vector<Mokinys> &A, int &temp, char strategija)
+void Mokinys ::Skaitymas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<int> &IrasuSk, string failas, vector<Mokinys> &A, int &temp, char strategija)
 {
     visasLaikas = 0.0;
     string eil;
@@ -137,16 +137,16 @@ void Mokinys :: Skaitymas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Moks
     visasLaikas += diff.count();
 
     Vidurkis(A);
-    if(strategija == '1')
+    if (strategija == '1')
         StudentuRusiavimas(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
-    else if(strategija == '2')
+    else if (strategija == '2')
         StudentuRusiavimas2(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
-    else if(strategija == '3')
+    else if (strategija == '3')
         StudentuRusiavimas3(Nuskriaustieji, Mokslinciai, A, IrasuSk, failas, temp);
 
     cout << endl;
 }
-void Mokinys :: StudentuRusiavimas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp)
+void Mokinys ::StudentuRusiavimas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp)
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
@@ -180,12 +180,12 @@ void Mokinys :: StudentuRusiavimas(vector<Mokinys> &Nuskriaustieji, vector<Mokin
     /* sort(Mokslinciai.begin(), Mokslinciai.end(), PagalVidurki);
     sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalVidurki); */
 
-    //cout << "~Mokslinciai~" << endl;
+    // cout << "~Mokslinciai~" << endl;
     Isvedimas2(Mokslinciai, Mokslinciai.size(), filename);
-    //cout << "~Nuskriaustieji~" << endl;
+    // cout << "~Nuskriaustieji~" << endl;
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
-void Mokinys :: StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp)
+void Mokinys ::StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp)
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
@@ -203,9 +203,10 @@ void Mokinys :: StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Moki
     auto start1 = chrono::high_resolution_clock::now();
     auto st1 = start1;
 
-    for (int i=A.size() - 1; i >= 0; i--)
+    for (int i = A.size() - 1; i >= 0; i--)
     {
-        if (A[i].VID > 5.0){
+        if (A[i].VID > 5.0)
+        {
             Nuskriaustieji.push_back(A[i]);
             A.pop_back();
         }
@@ -219,12 +220,12 @@ void Mokinys :: StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Moki
     /* sort(Mokslinciai.begin(), Mokslinciai.end(), PagalVidurki);
     sort(Nuskriaustieji.begin(), Nuskriaustieji.end(), PagalVidurki); */
 
-    //cout << "~Mokslinciai~" << endl;
+    // cout << "~Mokslinciai~" << endl;
     Isvedimas2(A, A.size(), filename);
-    //cout << "~Nuskriaustieji~" << endl;
+    // cout << "~Nuskriaustieji~" << endl;
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
-void Mokinys :: StudentuRusiavimas3(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp)
+void Mokinys ::StudentuRusiavimas3(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp)
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
@@ -237,7 +238,8 @@ void Mokinys :: StudentuRusiavimas3(vector<Mokinys> &Nuskriaustieji, vector<Moki
     cout << "Studentu rusiavimas didejimo tvarka uztruko: " << diff.count() << "s\n";
     visasLaikas += diff.count();
 
-    auto partition_point = partition(A.begin(), A.end(), [](const Mokinys &m) { return m.VID < 5.0; });
+    auto partition_point = partition(A.begin(), A.end(), [](const Mokinys &m)
+                                     { return m.VID < 5.0; });
 
     auto start1 = chrono::high_resolution_clock::now();
 
@@ -250,10 +252,10 @@ void Mokinys :: StudentuRusiavimas3(vector<Mokinys> &Nuskriaustieji, vector<Moki
 
     cout << "Visa programa " + to_string(temp) + " uztruko: " << visasLaikas << "s\n";
 
-     Isvedimas2(A, A.size(), filename);
-     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
+    Isvedimas2(A, A.size(), filename);
+    Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
-void Mokinys :: Isvedimas(const vector<Mokinys> &A, int MOK_kiekis, string isvedimas)
+void Mokinys ::Isvedimas(const vector<Mokinys> &A, int MOK_kiekis, string isvedimas)
 {
     char kint;
     cout << "Rezultatus matyti norite ekrane ar faile?(e/f): ";
@@ -295,11 +297,12 @@ void Mokinys :: Isvedimas(const vector<Mokinys> &A, int MOK_kiekis, string isved
     else
         throw runtime_error("Netinkama ivestis!");
 }
-void Mokinys :: Isvedimas2(const vector<Mokinys> &A, int MOK_kiekis, string isvedimas)
+void Mokinys ::Isvedimas2(const vector<Mokinys> &A, int MOK_kiekis, string isvedimas)
 {
-/*     auto start = chrono::high_resolution_clock::now();
-    auto st = start;
- */ ofstream fr(isvedimas);
+    /*     auto start = chrono::high_resolution_clock::now();
+        auto st = start;
+     */
+    ofstream fr(isvedimas);
     fr << setw(20) << left << "Vardas" << setw(20) << left << "Pavarde" << setw(20) << right << "Galutinis (Vid.) / Galutinis(Med.)" << endl;
     fr << setfill('-') << setw(80) << " " << endl;
     fr << setfill(' ');
@@ -313,7 +316,7 @@ void Mokinys :: Isvedimas2(const vector<Mokinys> &A, int MOK_kiekis, string isve
     /* chrono::duration<double> diff = chrono::high_resolution_clock::now() - start;
     cout << "Studentu isvedimas i failus uztruko: " << diff.count() << "s\n"; */
 }
-void Mokinys :: Rikiavimas(vector<Mokinys> &Mokslinciai, vector<Mokinys> &Nuskriaustieji, vector<int> &IrasuSk)
+void Mokinys ::Rikiavimas(vector<Mokinys> &Mokslinciai, vector<Mokinys> &Nuskriaustieji, vector<int> &IrasuSk)
 {
     char kint;
     cout << "Pagal ka rikiuoti: varda, pavarde, vidurki, mediana?(v, p, V, m)" << endl;
@@ -341,62 +344,154 @@ void Mokinys :: Rikiavimas(vector<Mokinys> &Mokslinciai, vector<Mokinys> &Nuskri
     else
         throw runtime_error("Netinkama ivestis!");
 }
-void testConstructor(){
+void testConstructor()
+{
     vector<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
-    assert(mok.getVardas() == "Vardenis");
-    assert(mok.getPavarde() == "Pavardenis");
-    assert(mok.getND() == temp);
-    assert(mok.getEgzaminas() == 9);
-    assert(mok.getVID() == 8);
-    assert(mok.getMED() == 7);
-    cout << "Konstruktoriaus testavimas sekmingas!"<<endl;
+    if (mok.getVardas() == "Vardenis")
+        cout << "Vardas tinkamas!" << endl;
+    else
+        cout << "Vardas netinkamas!" << endl;
+    if (mok.getPavarde() == "Pavardenis")
+        cout << "Pavarde tinkama!" << endl;
+    else
+        cout << "Pavarde netinkama!" << endl;
+    if (mok.getND() == temp)
+        cout << "Namu darbai tinkami!";
+    else
+        cout << "Namu darbai netinkami!";
+    if (mok.getEgzaminas() == 9)
+        cout << "Egzaminas tinkamas!";
+    else
+        cout << "Egzaminas netinkamas!" << endl;
+    if (mok.getVID() == 8)
+        cout << "Vidurkis tinkamas!";
+    else
+        cout << "Vidurkis netinkamas!" << endl;
+    if (mok.getMED() == 7)
+        cout << "Mediana tinkama!" << endl;
+    else
+        cout << "Mediana netinkama!" << endl;
 }
-void testCopyConstructor(){
+void testCopyConstructor()
+{
     vector<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
-    Mokinys mok1=mok;
-    assert(mok.getVardas() == "Vardenis");
-    assert(mok.getPavarde() == "Pavardenis");
-    assert(mok.getND() == temp);
-    assert(mok.getEgzaminas() == 9);
-    assert(mok.getVID() == 8);
-    assert(mok.getMED() == 7);
-    cout << "Copy konstruktoriaus testavimas sekmingas!"<<endl;
+    Mokinys mok1 = mok;
+    if (mok1.getVardas() == "Vardenis")
+        cout << "Vardas tinkamas!" << endl;
+    else
+        cout << "Vardas netinkamas!" << endl;
+    if (mok1.getPavarde() == "Pavardenis")
+        cout << "Pavarde tinkama!" << endl;
+    else
+        cout << "Pavarde netinkama!" << endl;
+    if (mok1.getND() == temp)
+        cout << "Namu darbai tinkami!" << endl;
+    else
+        cout << "Namu darbai netinkami!" << endl;
+    if (mok1.getEgzaminas() == 9)
+        cout << "Egzaminas tinkamas!"<< endl;
+    else
+        cout << "Egzaminas netinkamas!" << endl;
+    if (mok1.getVID() == 8)
+        cout << "Vidurkis tinkamas!" << endl;
+    else
+        cout << "Vidurkis netinkamas!" << endl;
+    if (mok1.getMED() == 7)
+        cout << "Mediana tinkama!" << endl;
+    else
+        cout << "Mediana netinkama!" << endl;
 }
-void testMoveConstructor(){
+void testMoveConstructor()
+{
     vector<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
-    Mokinys mok1=move(mok);
-    assert(mok1.getVardas() == "Vardenis");
-    assert(mok1.getPavarde() == "Pavardenis");
-    assert(mok1.getND() == temp);
-    assert(mok1.getEgzaminas() == 9);
-    assert(mok1.getVID() == 8);
-    assert(mok1.getMED() == 7);
-    cout << "Move konstruktoriaus testavimas sekmingas!"<<endl;
+    Mokinys mok1 = move(mok);
+    if (mok1.getVardas() == "Vardenis")
+        cout << "Vardas tinkamas!" << endl;
+    else
+        cout << "Vardas netinkamas!" << endl;
+    if (mok1.getPavarde() == "Pavardenis")
+        cout << "Pavarde tinkama!" << endl;
+    else
+        cout << "Pavarde netinkama!" << endl;
+    if (mok1.getND() == temp)
+        cout << "Namu darbai tinkami!" << endl;
+    else
+        cout << "Namu darbai netinkami!" << endl;
+    if (mok1.getEgzaminas() == 9)
+        cout << "Egzaminas tinkamas!" << endl;
+    else
+        cout << "Egzaminas netinkamas!" << endl;
+    if (mok1.getVID() == 8)
+        cout << "Vidurkis tinkamas!" << endl;
+    else
+        cout << "Vidurkis netinkamas!" << endl;
+    if (mok1.getMED() == 7)
+        cout << "Mediana tinkama!" << endl;
+    else
+        cout << "Mediana netinkama!" << endl;
 }
-void testCopyAssignment(){
+void testCopyAssignment()
+{
     vector<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
-    Mokinys mok1; mok1=mok;
-    assert(mok1.getVardas() == "Vardenis");
-    assert(mok1.getPavarde() == "Pavardenis");
-    assert(mok1.getND() == temp);
-    assert(mok1.getEgzaminas() == 9);
-    assert(mok1.getVID() == 8);
-    assert(mok1.getMED() == 7);
-    cout << "Copy assignment testavimas sekmingas!"<<endl;
+    Mokinys mok1;
+    mok1 = mok;
+    if (mok1.getVardas() == "Vardenis")
+        cout << "Vardas tinkamas!" << endl;
+    else
+        cout << "Vardas netinkamas!" << endl;
+    if (mok1.getPavarde() == "Pavardenis")
+        cout << "Pavarde tinkama!" << endl;
+    else
+        cout << "Pavarde netinkama!" << endl;
+    if (mok1.getND() == temp)
+        cout << "Namu darbai tinkami!" << endl;
+    else
+        cout << "Namu darbai netinkami!" << endl;
+    if (mok1.getEgzaminas() == 9)
+        cout << "Egzaminas tinkamas!" << endl;
+    else
+        cout << "Egzaminas netinkamas!" << endl;
+    if (mok1.getVID() == 8)
+        cout << "Vidurkis tinkamas!" << endl;
+    else
+        cout << "Vidurkis netinkamas!" << endl;
+    if (mok1.getMED() == 7)
+        cout << "Mediana tinkama!" << endl;
+    else
+        cout << "Mediana netinkama!" << endl;
 }
-void testMoveAssignment(){
+void testMoveAssignment()
+{
     vector<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
-    Mokinys mok1; mok1=move(mok);
-    assert(mok1.getVardas() == "Vardenis");
-    assert(mok1.getPavarde() == "Pavardenis");
-    assert(mok1.getND() == temp);
-    assert(mok1.getEgzaminas() == 9);
-    assert(mok1.getVID() == 8);
-    assert(mok1.getMED() == 7);
-    cout << "Move assignment testavimas sekmingas!"<<endl;
+    Mokinys mok1;
+    mok1 = move(mok);
+    if (mok1.getVardas() == "Vardenis")
+        cout << "Vardas tinkamas!" << endl;
+    else
+        cout << "Vardas netinkamas!" << endl;
+    if (mok1.getPavarde() == "Pavardenis")
+        cout << "Pavarde tinkama!" << endl;
+    else
+        cout << "Pavarde netinkama!" << endl;
+    if (mok1.getND() == temp)
+        cout << "Namu darbai tinkami!" << endl;
+    else
+        cout << "Namu darbai netinkami!" << endl;
+    if (mok1.getEgzaminas() == 9)
+        cout << "Egzaminas tinkamas!" << endl;
+    else
+        cout << "Egzaminas netinkamas!" << endl;
+    if (mok1.getVID() == 8)
+        cout << "Vidurkis tinkamas!" << endl;
+    else
+        cout << "Vidurkis netinkamas!" << endl;
+    if (mok1.getMED() == 7)
+        cout << "Mediana tinkama!" << endl;
+    else
+        cout << "Mediana netinkama!" << endl;
 }

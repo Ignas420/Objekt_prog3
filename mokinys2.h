@@ -55,7 +55,7 @@ public:
         : Zmogus(move(vard), move(pav)), ND(nd), egzaminas(e), VID(vid), MED(med) {}
 
     // Destructor
-    ~Mokinys() {}
+    ~Mokinys() = default;
 
     void patikrinimas() const override{};
 

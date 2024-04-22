@@ -13,14 +13,33 @@ int main() {
 
         cout << "Ar norite istestuoti konstruktorius ir assignment'us?(jei taip, irasykite 't'): " << endl;
         cin >> input4;
-        if(input4 == 't'){
-        testConstructor();
-        testCopyConstructor();
-        testMoveConstructor();
-        testCopyAssignment();
-        testMoveAssignment();
+        if (input4 == 't')
+        {
+            int num;
+            cout << "Ka norite testuoti?" << endl;
+            cout << "testConstructor - 1" << endl;
+            cout << "testCopyConstructor - 2" << endl;
+            cout << "testMoveConstructor - 3" << endl;
+            cout << "testCopyAssignment - 4" << endl;
+            cout << "testMoveAssignment - 5" << endl;
+            cin >> num;
+            if (cin.fail())
+                throw runtime_error("Netinkama ivestis!");
+            switch (num)
+            {
+            case 1:
+                testConstructor();
+            case 2:
+                testCopyConstructor();
+            case 3:
+                testMoveConstructor();
+            case 4:
+                testCopyAssignment();
+            case 5:
+                testMoveAssignment();
+            }
         }
-        else 
+        else
             throw runtime_error("Netinkama ivestis!");
 
         cout << "Norite ivesti ar skaityti is failo?(i/s) " << endl;
