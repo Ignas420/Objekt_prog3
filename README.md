@@ -35,7 +35,13 @@ Perdengti metodai:
 
 ![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/affb029c-8b41-48d6-abb1-bebfbd40e959)
 
+**Taip pat, vartotojui yra galimybe pasirinkti koki "Rule of five" metoda norima testuoti:**
 
+![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/b429c4da-7f6f-4a40-bce7-697017c714c8)
+
+Isvedimas atrodo kazkas panasaus i tai:
+
+![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/8da40a0e-d4b2-4794-9bb6-f2f105a2a5c3)
 
 
 
