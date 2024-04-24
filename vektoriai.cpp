@@ -33,14 +33,19 @@ int main()
             {
             case 1:
                 testConstructor();
+                break;
             case 2:
                 testCopyConstructor();
+                break;
             case 3:
                 testMoveConstructor();
+                break;
             case 4:
                 testCopyAssignment();
+                break;
             case 5:
                 testMoveAssignment();
+                break;
             }
         }
         else

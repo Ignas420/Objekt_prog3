@@ -103,8 +103,8 @@ public:
         }
         cout << endl;
         fr << "Egzamino pazymys: " << temp1.egzaminas << endl;
-        fr << "Median: " << temp1.MED << endl;
-        fr << "Average: " << temp1.VID << endl;
+        fr << "Mediana: " << temp1.MED << endl;
+        fr << "Vidurkis: " << temp1.VID << endl;
         return fr;
     }
 
@@ -121,11 +121,11 @@ public:
         {
             temp1.ND.push_back(pazymys);
         }
-        cout << "Enter exam score: ";
+        cout << "Iveskite egzamino pazymi: ";
         fd >> temp1.egzaminas;
-        cout << "Enter median score: ";
+        cout << "Iveskite mediana: ";
         fd >> temp1.MED;
-        cout << "Enter average score: ";
+        cout << "Iveskite vidurki: ";
         fd >> temp1.VID;
         return fd;
     }
