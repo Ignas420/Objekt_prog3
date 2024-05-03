@@ -367,20 +367,6 @@ void testCopyConstructor()
     cout << "Copy konstruktorius veikia!" << endl;
 }
 
-void testMoveConstructor()
-{
-    list<int> temp{1, 2, 3, 4};
-    Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
-    Mokinys mok1 = move(mok);
-    assert(mok1.getVardas() == "Vardenis");
-    assert(mok1.getPavarde() == "Pavardenis");
-    assert(mok1.getND() == temp);
-    assert(mok1.getEgzaminas() == 9);
-    assert(mok1.getVID() == 8);
-    assert(mok1.getMED() == 7);
-    cout << "Move konstruktorius veikia!" << endl;
-}
-
 void testCopyAssignment()
 {
     list<int> temp{1, 2, 3, 4};
@@ -409,4 +395,17 @@ void testMoveAssignment()
     assert(mok1.getVID() == 8);
     assert(mok1.getMED() == 7);
     cout << "Move assignment veikia!" << endl;
+}
+void testMoveConstructor()
+{
+    list<int> temp{1, 2, 3, 4};
+    Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+    Mokinys mok1 = move(mok);
+    assert(mok1.getVardas() == "Vardenis");
+    assert(mok1.getPavarde() == "Pavardenis");
+    assert(mok1.getND() == temp);
+    assert(mok1.getEgzaminas() == 9);
+    assert(mok1.getVID() == 8);
+    assert(mok1.getMED() == 7);
+    cout << "Move konstruktorius veikia!" << endl;
 }
