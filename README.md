@@ -1,48 +1,100 @@
-**v1.5**
+**v2.0**
 
-**Apie programa:**
+Makefile set-up:
+**Makefile idiegimas naudojant Chocolatey (Windows)**
 
-Programa yra skirta valdyti mokiniu duomenis. Ji igyvendina Mokinio klase, kuri leidzia saugoti studentu vardus, pavardes, namu darbu rezultatus, egzamino pazymius ir kitus duomenis
+Isitikinkite, kad turite Chocolatey idiegima: patikrinkite, ar jusu kompiuteryje yra idiegta Chocolatey. Jei ne, idiekite pagal instrukcijas https://chocolatey.org/install.
 
-**Pridėtos funkcijos v1.5:**
+Idiekite Makefile: atidarykite PowerShell kaip administratorius ir ivykdykite sia komanda:
 
-1. Vietoje vienos klases Mokinys, buvo prideta bazine klase Zmogus ir derived klase Mokinys
-2. Bazine klase Zmogus buvo paversta i abstrakciaja klase
+choco install make
 
-**Kas yra "Rule of five" metodai?**
+Patikrinkite idiegima: patikrinkite, ar Makefile sekmingai idiegtas, vykdydami komanda:
 
-**Destruktorius:** sis metodas atsakingas uz resursu atlaisvinima, kurie buvo isskirti objekto gyvavimo metu. Kai objektas yra sunaikinamas arba iseina is scopo, destruktorius yra automatiskai iskvieciamas
+make --version
 
-**Kopijavimo konstruktorius:** kopijavimo konstruktorius yra metodas, kuris sukuria nauja objekta pagal esama objekta. Tai reikalinga, kai norite nukopijuoti viena objekta i kita
+Jei viskas sekminga, turetumete pamatyti Make versijos informacija
 
-**Kopijavimo priskyrimo operatorius:** kopijavimo priskyrimo operatorius yra metodas, kuris nukopijuoja vieno objekto busena i kita esama objekta
+Makefile idiegimas naudojant kitus metodus
+**MacOS:** Makefile iprastai yra idiegtas standartinėje MacOS distribucijoje, todel papildomu veiksmu paprastai nereikia
 
-**Perkelimo konstruktorius:** perkelimo konstruktorius yra specialus metodas, kuris perkelia resursus is vieno objekto i kita, paliekant pirmini objekta tuscia
+**Linux:** Daugumoje Linux distribuciju Makefile taip pat yra idiegtas is anksto. Jei reikia, naudokite savo paketu tvarkykle, pvz., apt-get, yum, dnf, arba kita pagal distribucija
 
-**Perkelimo priskyrimo operatorius:** perkelimo priskyrimo operatorius yra metodas, kuris perkelia resursus is vieno objekto i kita, panaikinant pirmini objekta
+**Windows (be Chocolatey):** Noredami idiegti Makefile Windows sistemoje be Chocolatey, galite naudoti rankinius idiegimo failus, kuriuos galite rasti internete. Paprastai tie failai turi .exe pletini ir gali buti lengvai idiegti, sekdamie pridedamas instrukcijas
 
-**Base ir derived klasiu bei ju metodu nuotraukos:**
+Norint pradeti, i terminala reikia ivesti "make", kai viskas bus sukompiliuota, galima testi su programa, jei norima, galima rasyti "make clean" norint istrinti .o ir .exe failus
 
-Bazine klase:
+**Programos naudojimas veikimo metu:**
 
-![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/ef37f0b0-5e8f-47bd-b38b-fdb33505eec2)
+Vartotojas pasirenka, su kokiu konteineriu norima vygdyti programa ir pasirinktinai i terminala parasoma: ./vektoriai , ./list arba ./deque
 
-Derived klase:
+Vos paleidus programa atsiras pasirinkimas ar pratestuoti musu turimus klases metodus , jei paspaudziame 't', tada pasirenkame numeri nuo 1-5 ir gauname testo rezultata
 
-![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/7ddde7dd-7e49-45f9-8073-ad804e01fcc7)
+Toliau musu bus klausiama, ar norime ivesti duomenis ar skaityti is failo
 
-Perdengti metodai:
+1. Jei bus pasirenkamas duomenu ivedimas, bus reikalaujama pasirinkti ar norima ivesti/generuoti duomenis
+   
+1.1 Ar vienu, ar kitu budu reikes ivesti studentu vardus ir pavardes, toliau reikes ivesti studentu namu darbu ir egzamino pazymius
 
-![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/affb029c-8b41-48d6-abb1-bebfbd40e959)
+1.2 Jei bus pasirinktas duomenu generavimas, po vardu ir pavardziu irasymo nieko daryti nebereikes
 
-**Taip pat, vartotojui yra galimybe pasirinkti koki "Rule of five" metoda norima testuoti:**
+1.3 Galiausiai reikes pasirinkti kur norime matyti duomenis ekrane ar faile
 
-![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/b429c4da-7f6f-4a40-bce7-697017c714c8)
+2. Jei pacioje pradzioje bus pasirinktas skaitymas, jusu bus klausiama ar norite generuoti naujus failus, jei ivesite 't'(taip), bus generuojami nauji failai, jei ivesite bet koki kita simboli, programa veiks toliau
 
-Isvedimas atrodo kazkas panasaus i tai:
+2.1 Toliau, jusu bus klausiama ar norite skaityti naujai sukurtus failus, ar jau turimus
 
-![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/8da40a0e-d4b2-4794-9bb6-f2f105a2a5c3)
+2.2 Bus prasoma ivesti, pasirinktinai, turimu/nauju failu kieki, jie bus nuskaitomi, isvedami apytiksliai testavimu laikai ekrane bei sukuriami nauji failai, kuriuose yra surusiuoti studentai pagal vidurki (nuskriaustieji/mokslinciai)
 
+2.3 Galiausiai, kaip ir anksciau, bus isvedami apytiksliai testavimu laikai ekrane bei sukuriami nauji failai, kuriuose yra surusiuoti studentai pagal vidurki (nuskriaustieji/mokslinciai)
+
+**RELEASAI**
+
+**0.1**
+
+Sukurta nauja repozitorija, realizuotos elementarios funkcijos, kaip vidurkio ir medianos skaiciavimas. Rezultate gavome, kad vektorius naudoti yra zymiai efektyviau atminties atzvilgiu.
+
+**0.2**
+
+Programa padaryta prieinamesne vartotojui, galima ne tik irasyti, bet ir skaityti is failo. Testuojama su 10000, 100000 ir 1000000 dydzio failais.
+
+**0.3**
+
+Prideti header failai, try/catch blokai. Rezultate programa tapo labiau strukturizuota bei klaidu gaudymas uzdrausdavo programos luzima.
+
+**0.4**
+
+Programa pagal vartotojo pasirinkima sukuria naujus failus, isskirsto mokinius i vargsiukus ir mokslincius, isveda i failus. Padaryti tikslus laiko matavimai.
+
+**1.0**
+
+Programa padaryta veikti su atskiro tipo konteineriais: deque, list ir vector. Kiekvienas pagal tris strategijas. Pagal matavimo rezultatus greiciausiai buvo vykdoma vector programa naudojant 3 strategija.
+
+**1.1**
+
+Atliktas repozitorijos kopijavimas. Programoje is strukturu pereinama i klases. Rezultate, programa veikia nasiau naudojant klases.
+
+**1.2**
+
+Igyvendinti visi "Rule of Five" ir isviesties bei ivesties operatoriai savai klasei.
+
+**1.5**
+
+Sukurta dar viena **bazine**, abstrakcioji klase, kuriai priklauso klase derived. Prideti konstruktoriaus, copy konstruktoriaus... testavimai.
+
+**2.0**
+
+Per Doxygen HTML formatu sukurta dokumentacija bei padaryti Unit testai naudojant patogu C++ framework'a supratimui.
+
+**Kaip atrodo Doxygen dokumentacija:**
+
+![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/dd0c14b6-ce8f-4a98-96fc-e10f8e265b1e)
+
+**Unit testai:**
+
+![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/5e6a2ad1-92d9-451d-8a35-b1ff5b023d78)
+
+![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/ba5aecaf-34b2-4d37-9705-2e259dd330e1)
 
 
 
