@@ -15,6 +15,7 @@
 #include <deque>
 #include <cassert>
 #include <utility>
+#include <gtest/gtest.h>
 
 using namespace std;
 

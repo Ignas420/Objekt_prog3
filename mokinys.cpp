@@ -385,20 +385,6 @@ void testMoveConstructor()
     cout << "Move konstruktorius veikia!" << endl;
 }
 
-void testCopyAssignment()
-{
-    vector<int> temp{1, 2, 3, 4};
-    Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
-    Mokinys mok1;
-    mok1 = mok;
-    assert(mok1.getVardas() == "Vardenis");
-    assert(mok1.getPavarde() == "Pavardenis");
-    assert(mok1.getND() == temp);
-    assert(mok1.getEgzaminas() == 9);
-    assert(mok1.getVID() == 8);
-    assert(mok1.getMED() == 7);
-    cout << "Copy assignment veikia" << endl;
-}
 
 void testMoveAssignment()
 {
@@ -413,4 +399,60 @@ void testMoveAssignment()
     assert(mok1.getVID() == 8);
     assert(mok1.getMED() == 7);
     cout << "Move assignment veikia!" << endl;
+}
+
+void testCopyAssignment()
+{
+    vector<int> temp{1, 2, 3, 4};
+    Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
+    Mokinys mok1;
+    mok1 = mok;
+    assert(mok1.getVardas() == "Vardenis");
+    assert(mok1.getPavarde() == "Pavardenis");
+    assert(mok1.getND() == temp);
+    assert(mok1.getEgzaminas() == 9);
+    assert(mok1.getVID() == 8);
+    assert(mok1.getMED() == 7);
+    cout << "Copy assignment veikia" << endl;
+}
+// Test case'as patikrinti, ar Mokinys konstruktorius teisingai inicializuoja objektą
+TEST(MokinysTest, ConstructorTest) {
+    Mokinys m("Vardenis", "Pavardenis", {10, 9, 8}, 7, 8.5, 8.0);
+    EXPECT_EQ(m.getVardas(), "Vardenis");
+    EXPECT_EQ(m.getPavarde(), "Pavardenis");
+    EXPECT_EQ(m.getND().size(), 3);
+    EXPECT_EQ(m.getEgzaminas(), 7);
+    EXPECT_DOUBLE_EQ(m.getVID(), 8.5);
+    EXPECT_DOUBLE_EQ(m.getMED(), 8.0);
+}
+
+// Test case'as patikrinti, ar Mokinys getter funkcijos veikia kaip tikėtasi
+TEST(MokinysTest, GetterTest) {
+    Mokinys m("Vardenis", "Pavardenis", {10, 9, 8}, 7, 8.5, 8.0);
+    EXPECT_EQ(m.getVardas(), "Vardenis");
+    EXPECT_EQ(m.getPavarde(), "Pavardenis");
+    EXPECT_EQ(m.getND().size(), 3);
+    EXPECT_EQ(m.getEgzaminas(), 7);
+    EXPECT_DOUBLE_EQ(m.getVID(), 8.5);
+    EXPECT_DOUBLE_EQ(m.getMED(), 8.0);
+}
+
+// Test case'as patikrinti, ar Mokinys setter funkcijos veikia kaip tikėtasi
+TEST(MokinysTest, SetterTest) {
+    Mokinys m;
+    m.setVardas("NaujasVardas");
+    m.setPavarde("NaujaPavarde");
+    m.addND(10);
+    m.addND(9);
+    m.addND(8);
+    m.setEgzaminas(7);
+    m.setVID(8.5);
+    m.setMED(8.0);
+
+    EXPECT_EQ(m.getVardas(), "NaujasVardas");
+    EXPECT_EQ(m.getPavarde(), "NaujaPavarde");
+    EXPECT_EQ(m.getND().size(), 3);
+    EXPECT_EQ(m.getEgzaminas(), 7);
+    EXPECT_DOUBLE_EQ(m.getVID(), 8.5);
+    EXPECT_DOUBLE_EQ(m.getMED(), 8.0);
 }
