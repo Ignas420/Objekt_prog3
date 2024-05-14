@@ -92,9 +92,9 @@ Per Doxygen HTML formatu sukurta dokumentacija bei padaryti Unit testai naudojan
 
 **Unit testai:**
 
-![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/5e6a2ad1-92d9-451d-8a35-b1ff5b023d78)
+![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/3afb91e4-078b-4c5b-8399-01093ad1a483)
 
-![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/ba5aecaf-34b2-4d37-9705-2e259dd330e1)
+![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/9dac1d72-0d8e-42e6-bffe-f9bd5660e572)
 
 
 
