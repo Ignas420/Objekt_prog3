@@ -1,0 +1,170 @@
+\doxysection{mokinys2.\+h}
+\hypertarget{mokinys2_8h_source}{}\label{mokinys2_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MOKINYS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MOKINYS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ CRfv[]\ =\ \textcolor{stringliteral}{"{}rezultatai.txt"{}};}
+\DoxyCodeLine{00022\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ CRfv2[]\ =\ \textcolor{stringliteral}{"{}naujas\_failas.txt"{}};}
+\DoxyCodeLine{00023\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ CRfv3[]\ =\ \textcolor{stringliteral}{"{}mokslinciai.txt"{}};}
+\DoxyCodeLine{00024\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ CRfv4[]\ =\ \textcolor{stringliteral}{"{}nuskriaustieji.txt"{}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ const\ char\ CDfv[]\ =\ "{}kursiokai.txt"{};}}
+\DoxyCodeLine{00027\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ CDfv0[]\ =\ \textcolor{stringliteral}{"{}studentai10000.txt"{}};}
+\DoxyCodeLine{00028\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ CDfv1[]\ =\ \textcolor{stringliteral}{"{}studentai100000.txt"{}};}
+\DoxyCodeLine{00029\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ CDfv2[]\ =\ \textcolor{stringliteral}{"{}studentai1000000.txt"{}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_zmogus}{Zmogus}}}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{string}\ vardas;}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{string}\ pavarde;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{class_zmogus}{Zmogus}}(\textcolor{keywordtype}{string}\ vard\ =\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{keywordtype}{string}\ pav\ =\ \textcolor{stringliteral}{"{}"{}})\ :\ vardas(move(vard)),\ pavarde(move(pav))\ \{\}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_zmogus}{\string~Zmogus}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ patikrinimas()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mokinys}{Mokinys}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_zmogus}{Zmogus}}}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{comment}{/*\ string\ vardas;}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ string\ pavarde;\ */}}
+\DoxyCodeLine{00048\ \ \ \ \ deque<int>\ ND;}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ egzaminas;}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{double}\ VID;}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{double}\ MED;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ Constructor}}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{class_mokinys}{Mokinys}}(\textcolor{keywordtype}{string}\ vard\ =\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{keywordtype}{string}\ pav\ =\ \textcolor{stringliteral}{"{}"{}},\ deque<int>\ nd\ =\ \{\},\ \textcolor{keywordtype}{int}\ e\ =\ 0,\ \textcolor{keywordtype}{double}\ vid\ =\ 0.0,\ \textcolor{keywordtype}{double}\ med\ =\ 0.0)}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_zmogus}{Zmogus}}(move(vard),\ move(pav)),\ ND(nd),\ egzaminas(e),\ VID(vid),\ MED(med)\ \{\}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{//\ Destructor}}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{class_mokinys}{\string~Mokinys}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ patikrinimas()\textcolor{keyword}{\ const\ override}\{\};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ Copy\ constructor}}
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{class_mokinys}{Mokinys}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&other)\ :\ \mbox{\hyperlink{class_zmogus}{Zmogus}}(other),\ ND(other.ND),\ egzaminas(other.egzaminas),\ VID(other.VID),\ MED(other.MED)\ \{\}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{//\ Move\ contructor}}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{class_mokinys}{Mokinys}}(\mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&\&other)\ noexcept}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_zmogus}{Zmogus}}((move(other.vardas)),\ (move(other.pavarde))),}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ ND(move(other.ND)),\ egzaminas(exchange(other.egzaminas,\ 0)),}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ VID(exchange(other.VID,\ 0)),\ MED(exchange(other.MED,\ 0))\ \{\}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{comment}{//\ Copy\ Assignment\ Operator}}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&other)}
+\DoxyCodeLine{00074\ \ \ \ \ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ Zmogus::operator=(other);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ ND\ =\ other.ND;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ egzaminas\ =\ other.egzaminas;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ VID\ =\ other.VID;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ MED\ =\ other.MED;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{comment}{//\ Move\ Assignment\ Operator}}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&operator=(\mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&\&other)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00085\ \ \ \ \ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ vardas\ =\ move(other.vardas);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ pavarde\ =\ move(other.pavarde);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ ND\ =\ move(other.ND);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ egzaminas\ =\ exchange(other.egzaminas,\ 0);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ VID\ =\ exchange(other.VID,\ 0);}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ MED\ =\ exchange(other.MED,\ 0);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\ \&operator<<(std::ostream\ \&fr,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&temp1)}
+\DoxyCodeLine{00096\ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ fr\ <<\ \textcolor{stringliteral}{"{}Vardas:\ "{}}\ <<\ temp1.vardas\ <<\ endl;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ fr\ <<\ \textcolor{stringliteral}{"{}Pavarde:\ "{}}\ <<\ temp1.pavarde\ <<\ endl;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ fr\ <<\ \textcolor{stringliteral}{"{}Namu\ darbai:\ "{}};}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ pazymys\ :\ temp1.ND)}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ fr\ <<\ pazymys\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ fr\ <<\ \textcolor{stringliteral}{"{}Egzamino\ pazymys:\ "{}}\ <<\ temp1.egzaminas\ <<\ endl;}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ fr\ <<\ \textcolor{stringliteral}{"{}Mediana:\ "{}}\ <<\ temp1.MED\ <<\ endl;}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ fr\ <<\ \textcolor{stringliteral}{"{}Vidurkis:\ "{}}\ <<\ temp1.VID\ <<\ endl;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fr;}
+\DoxyCodeLine{00109\ \ \ \ \ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{friend}\ istream\ \&operator>>(istream\ \&fd,\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&temp1)}
+\DoxyCodeLine{00112\ \ \ \ \ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Iveskite\ varda:\ "{}};}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ fd\ >>\ temp1.vardas;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Iveskite\ pavarde:\ "{}};}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ fd\ >>\ temp1.pavarde;}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Iveskite\ namu\ darbus:\ "{}};}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ pazymys;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ temp1.ND.clear();}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (fd\ >>\ pazymys\ \&\&\ pazymys\ !=\ 0)}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ temp1.ND.push\_back(pazymys);}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Iveskite\ egzamino\ pazymi:\ "{}};}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ fd\ >>\ temp1.egzaminas;}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Iveskite\ mediana:\ "{}};}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ fd\ >>\ temp1.MED;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Iveskite\ vidurki:\ "{}};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ fd\ >>\ temp1.VID;}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fd;}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{//\ Getter\ functions}}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{string}\ getVardas()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ vardas;\ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{string}\ getPavarde()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ pavarde;\ \}}
+\DoxyCodeLine{00136\ \ \ \ \ deque<int>\ getND()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ ND;\ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{int}\ getEgzaminas()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ egzaminas;\ \}}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{double}\ getVID()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ VID;\ \}}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{double}\ getMED()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ MED;\ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{comment}{//\ Setter\ functions}}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{void}\ setVardas(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \&name)\ \{\ vardas\ =\ name;\ \}}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ setPavarde(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \&surname)\ \{\ pavarde\ =\ surname;\ \}}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{void}\ addND(\textcolor{keywordtype}{int}\ nd)\ \{\ ND.push\_back(nd);\ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{void}\ clearND()\ \{\ ND.clear();\ \}}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{void}\ setEgzaminas(\textcolor{keywordtype}{int}\ exam)\ \{\ egzaminas\ =\ exam;\ \}}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ setVID(\textcolor{keywordtype}{double}\ vid)\ \{\ VID\ =\ vid;\ \}}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{void}\ setMED(\textcolor{keywordtype}{double}\ med)\ \{\ MED\ =\ med;\ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{comment}{//\ Utility\ functions}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{void}\ Vidurkis(deque<Mokinys>\ \&A);}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{void}\ Isvedimas(\textcolor{keyword}{const}\ deque<Mokinys>\ \&A,\ \textcolor{keywordtype}{int}\ MOK\_kiekis,\ \textcolor{keywordtype}{string}\ isvedimas);}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{void}\ Isvedimas2(\textcolor{keyword}{const}\ deque<Mokinys>\ \&A,\ \textcolor{keywordtype}{int}\ MOK\_kiekis,\ \textcolor{keywordtype}{string}\ isvedimas);}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ PagalVidurki(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&b);}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ PagalMediana(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&b);}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ PagalVarda(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&b);}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ PagalPavarde(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_mokinys}{Mokinys}}\ \&b);}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{void}\ Skaitymas(deque<Mokinys>\ \&Nuskriaustieji,\ deque<Mokinys>\ \&Mokslinciai,\ deque<int>\ \&IrasuSk,\ \textcolor{keywordtype}{string}\ failas,\ deque<Mokinys>\ \&A,\ \textcolor{keywordtype}{int}\ \&temp,\ \textcolor{keywordtype}{char}\ strategija);}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{void}\ StudentuRusiavimas(deque<Mokinys>\ \&Nuskriaustieji,\ deque<Mokinys>\ \&Mokslinciai,\ deque<Mokinys>\ \&A,\ deque<int>\ \&IrasuSk,\ \textcolor{keywordtype}{string}\ failas,\ \textcolor{keywordtype}{int}\ \&temp);}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{void}\ StudentuRusiavimas2(deque<Mokinys>\ \&Nuskriaustieji,\ deque<Mokinys>\ \&Mokslinciai,\ deque<Mokinys>\ \&A,\ deque<int>\ \&IrasuSk,\ \textcolor{keywordtype}{string}\ failas,\ \textcolor{keywordtype}{int}\ \&temp);}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{void}\ StudentuRusiavimas3(deque<Mokinys>\ \&Nuskriaustieji,\ deque<Mokinys>\ \&Mokslinciai,\ deque<Mokinys>\ \&A,\ deque<int>\ \&IrasuSk,\ \textcolor{keywordtype}{string}\ failas,\ \textcolor{keywordtype}{int}\ \&temp);}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{void}\ Rikiavimas(deque<Mokinys>\ \&Mokslinciai,\ deque<Mokinys>\ \&Nuskriaustieji,\ deque<int>\ \&IrasuSk);}
+\DoxyCodeLine{00163\ \};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
