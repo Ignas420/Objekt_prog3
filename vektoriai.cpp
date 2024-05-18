@@ -15,7 +15,7 @@ int main()
         string eil;
         char input, input2, input3, input4;
 
-        cout << "Ar norite istestuoti konstruktorius ir assignment'us?(jei taip, irasykite 't'): " << endl;
+        cout << "Ar norite testuoti?(jei taip, irasykite 't'): " << endl;
         cin >> input4;
         if (input4 == 't')
         {
@@ -48,8 +48,6 @@ int main()
                 break;
             }
         }
-        else
-            throw runtime_error("Netinkama ivestis!");
 
         cout << "Norite ivesti ar skaityti is failo?(i/s) " << endl;
         cin >> input;
