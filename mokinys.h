@@ -399,6 +399,87 @@ void Vector<T>::assign(size_t count, const T& value) {
     _size = count;
 }
 
+template<typename T>
+void Vector<T>::insert(size_t index, const T& value) {
+    if (_size == _capacity) {
+        reallocate(_capacity == 0 ? 1 : _capacity * 2);
+    }
+    if (index < _size) {
+        std::move_backward(data + index, data + _size, data + _size + 1);
+    }
+    data[index] = value;
+    ++_size;
+}
+
+template<typename T>
+template<typename InputIterator>
+void Vector<T>::insert_range(size_t index, InputIterator first, InputIterator last) {
+    size_t count = std::distance(first, last);
+    if (_size + count > _capacity) {
+        reallocate(_size + count);
+    }
+    if (index < _size) {
+        std::move_backward(data + index, data + _size, data + _size + count);
+    }
+    std::copy(first, last, data + index);
+    _size += count;
+}
+
+template<typename T>
+void Vector<T>::append_range(std::initializer_list<T> ilist) {
+    if (_size + ilist.size() > _capacity) {
+        reallocate(_size + ilist.size());
+    }
+    std::copy(ilist.begin(), ilist.end(), data + _size);
+    _size += ilist.size();
+}
+
+template<typename T>
+T& Vector<T>::at(size_t index) {
+    if (index >= _size) {
+        throw std::out_of_range("Index out of range");
+    }
+    return data[index];
+}
+
+template<typename T>
+const T& Vector<T>::at(size_t index) const {
+    if (index >= _size) {
+        throw std::out_of_range("Index out of range");
+    }
+    return data[index];
+}
+
+template<typename T>
+typename std::reverse_iterator<T*> Vector<T>::rbegin() {
+    return std::reverse_iterator<T*>(end());
+}
+
+template<typename T>
+typename std::reverse_iterator<T*> Vector<T>::rend() {
+    return std::reverse_iterator<T*>(begin());
+}
+
+template<typename T>
+typename std::reverse_iterator<const T*> Vector<T>::rbegin() const {
+    return std::reverse_iterator<const T*>(end());
+}
+
+template<typename T>
+typename std::reverse_iterator<const T*> Vector<T>::rend() const {
+    return std::reverse_iterator<const T*>(begin());
+}
+
+template<typename T>
+void Vector<T>::reallocate(size_t newCapacity) {
+    T* newData = new T[newCapacity];
+    if (data) {
+        std::move(data, data + _size, newData);
+        delete[] data;
+    }
+    data = newData;
+    _capacity = newCapacity;
+}
 
 // Bazine ir Derived klases
 class Zmogus
