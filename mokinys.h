@@ -284,6 +284,49 @@ const T* Vector<T>::end() const {
     return data + _size;
 }
 
+template<typename T>
+T& Vector<T>::back() {
+    if (_size == 0) {
+        throw std::out_of_range("back() kvieciamas tusciui vektoriui");
+    }
+    return data[_size - 1];
+}
+
+template<typename T>
+const T& Vector<T>::back() const {
+    if (_size == 0) {
+        throw std::out_of_range("back() kvieciamas tusciui vektoriui");
+    }
+    return data[_size - 1];
+}
+
+template<typename T>
+T& Vector<T>::front() {
+    if (_size == 0) {
+        throw std::out_of_range("Calling front() on an empty vector");
+    }
+    return data[0];
+}
+
+template<typename T>
+const T& Vector<T>::front() const {
+    if (_size == 0) {
+        throw std::out_of_range("Calling front() on an empty vector");
+    }
+    return data[0];
+}
+
+template<typename T>
+T* Vector<T>::data_ptr() {
+    return data;
+}
+
+template<typename T>
+const T* Vector<T>::data_ptr() const {
+    return data;
+}
+
+
 
 // Bazine ir Derived klases
 class Zmogus
