@@ -105,7 +105,40 @@ public:
     typename std::reverse_iterator<T*> rend();
     typename std::reverse_iterator<const T*> rbegin() const;
     typename std::reverse_iterator<const T*> rend() const;
-}
+
+    friend bool operator==(const Vector<T>& lhs, const Vector<T>& rhs) {
+        if (lhs._size != rhs._size) {
+            return false;
+        }
+        for (size_t i = 0; i < lhs._size; ++i) {
+            if (lhs.data[i] != rhs.data[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    friend bool operator!=(const Vector<T>& lhs, const Vector<T>& rhs) {
+        return !(lhs == rhs);
+    }
+
+    friend bool operator<(const Vector<T>& lhs, const Vector<T>& rhs) {
+        return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+    }
+
+    friend bool operator<=(const Vector<T>& lhs, const Vector<T>& rhs) {
+        return !(rhs < lhs);
+    }
+
+    friend bool operator>(const Vector<T>& lhs, const Vector<T>& rhs) {
+        return rhs < lhs;
+    }
+
+    friend bool operator>=(const Vector<T>& lhs, const Vector<T>& rhs) {
+        return !(lhs < rhs);
+    }
+};
+
 
 // Bazine ir Derived klases
 class Zmogus
