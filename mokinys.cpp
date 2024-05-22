@@ -3,7 +3,7 @@
 
 void Palyginimas()
 {
-    vector<int> Dydziai = {10000, 100000, 1000000, 10000000, 100000000};
+    std::vector<int> Dydziai = {10000, 100000, 1000000, 10000000, 100000000};
 
     for(int j = 0; j<Dydziai.size(); j++){
 
@@ -22,7 +22,7 @@ void Palyginimas()
     }
     
     chrono::duration<double> diff = chrono::high_resolution_clock::now() - start;
-    cout << "std::vector push_back laikas su " << Dydziai[j] << " : " << diff.count() << endl;
+    cout << "std :: vector push_back laikas su " << Dydziai[j] << " : " << diff.count() << endl;
 
     Vector<int> v2;
     size_t template_exchange = 0;
@@ -31,8 +31,8 @@ void Palyginimas()
     auto start1 = chrono::high_resolution_clock::now();
     auto st1 = start1;
 
-    for (int i = 1; i <= Dydziai[j]; ++i){
-        v2.push_back(i);
+    for (int k = 1; k <= Dydziai[j]; ++k){
+        v2.push_back(k);
         if (v2.capacity() == v2.size()) {
             template_exchange++;
         }
