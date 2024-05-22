@@ -5,7 +5,7 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
-#include <vector>
+#include <Vector>
 #include <sstream>
 #include <algorithm>
 #include <chrono>
@@ -15,7 +15,8 @@
 #include <deque>
 #include <cassert>
 #include <utility>
-
+#include <initializer_list>
+#include <iterator>
 
 using namespace std;
 
@@ -29,6 +30,28 @@ const char CDfv0[] = "studentai10000.txt";
 const char CDfv1[] = "studentai100000.txt";
 const char CDfv2[] = "studentai1000000.txt";
 
+template <typename T>
+class Vector
+{
+private:
+    T *data;
+    size_t _size;
+    size_t _capacity;
+
+public:
+    Vector(size_t size, size_t capacity, const T &defaultValue)
+        : _size(size), _capacity(capacity)
+    {
+        data = new T[_capacity];
+        for (size_t i = 0; i < _size; ++i)
+        {
+            data[i] = defaultValue;
+        }
+    }
+    Vector();
+};
+
+// Bazine ir Derived klases
 class Zmogus
 {
 protected:
@@ -46,20 +69,20 @@ class Mokinys : public Zmogus
 private:
     /* string vardas;
     string pavarde; */
-    vector<int> ND;
+    Vector<int> ND;
     int egzaminas;
     double VID;
     double MED;
 
 public:
     // Constructor
-    Mokinys(string vard = "", string pav = "", vector<int> nd = {}, int e = 0, double vid = 0.0, double med = 0.0)
+    Mokinys(string vard = "", string pav = "", Vector<int> nd = {}, int e = 0, double vid = 0.0, double med = 0.0)
         : Zmogus(move(vard), move(pav)), ND(nd), egzaminas(e), VID(vid), MED(med) {}
 
     // Destructor
     ~Mokinys() = default;
 
-    void patikrinimas() const override{};
+    void patikrinimas() const override {};
 
     // Copy constructor
     Mokinys(const Mokinys &other) : Zmogus(other), ND(other.ND), egzaminas(other.egzaminas), VID(other.VID), MED(other.MED) {}
@@ -81,15 +104,32 @@ public:
         return *this;
     }
 
+    void clear()
+    {
+        vardas.clear();
+        pavarde.clear();
+        ND.clear();
+        egzaminas = 0;
+        VID = 0;
+        MED = 0;
+    }
+
     // Move Assignment Operator
     Mokinys &operator=(Mokinys &&other) noexcept
     {
-        vardas = move(other.vardas);
-        pavarde = move(other.pavarde);
-        ND = move(other.ND);
-        egzaminas = exchange(other.egzaminas, 0);
-        VID = exchange(other.VID, 0);
-        MED = exchange(other.MED, 0);
+        if (this != &other)
+        {
+            // Copy data from 'other' to 'this'
+            vardas = std::move(other.vardas);
+            pavarde = std::move(other.pavarde);
+            ND = std::move(other.ND);
+            egzaminas = other.egzaminas;
+            VID = other.VID;
+            MED = other.MED;
+
+            // Clear 'other'
+            other.clear();
+        }
         return *this;
     }
 
@@ -134,7 +174,7 @@ public:
     // Getter functions
     string getVardas() const { return vardas; }
     string getPavarde() const { return pavarde; }
-    vector<int> getND() const { return ND; }
+    Vector<int> getND() const { return ND; }
     int getEgzaminas() const { return egzaminas; }
     double getVID() const { return VID; }
     double getMED() const { return MED; }
@@ -149,18 +189,18 @@ public:
     void setMED(double med) { MED = med; }
 
     // Utility functions
-    void Vidurkis(vector<Mokinys> &A);
-    void Isvedimas(const vector<Mokinys> &A, int MOK_kiekis, string isvedimas);
-    void Isvedimas2(const vector<Mokinys> &A, int MOK_kiekis, string isvedimas);
+    void Vidurkis(Vector<Mokinys> &A);
+    void Isvedimas(const Vector<Mokinys> &A, int MOK_kiekis, string isvedimas);
+    void Isvedimas2(const Vector<Mokinys> &A, int MOK_kiekis, string isvedimas);
     static bool PagalVidurki(const Mokinys &a, const Mokinys &b);
     static bool PagalMediana(const Mokinys &a, const Mokinys &b);
     static bool PagalVarda(const Mokinys &a, const Mokinys &b);
     static bool PagalPavarde(const Mokinys &a, const Mokinys &b);
-    void Skaitymas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<int> &IrasuSk, string failas, vector<Mokinys> &A, int &temp, char strategija);
-    void StudentuRusiavimas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp);
-    void StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp);
-    void StudentuRusiavimas3(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp);
-    void Rikiavimas(vector<Mokinys> &Mokslinciai, vector<Mokinys> &Nuskriaustieji, vector<int> &IrasuSk);
+    void Skaitymas(Vector<Mokinys> &Nuskriaustieji, Vector<Mokinys> &Mokslinciai, Vector<int> &IrasuSk, string failas, Vector<Mokinys> &A, int &temp, char strategija);
+    void StudentuRusiavimas(Vector<Mokinys> &Nuskriaustieji, Vector<Mokinys> &Mokslinciai, Vector<Mokinys> &A, Vector<int> &IrasuSk, string failas, int &temp);
+    void StudentuRusiavimas2(Vector<Mokinys> &Nuskriaustieji, Vector<Mokinys> &Mokslinciai, Vector<Mokinys> &A, Vector<int> &IrasuSk, string failas, int &temp);
+    void StudentuRusiavimas3(Vector<Mokinys> &Nuskriaustieji, Vector<Mokinys> &Mokslinciai, Vector<Mokinys> &A, Vector<int> &IrasuSk, string failas, int &temp);
+    void Rikiavimas(Vector<Mokinys> &Mokslinciai, Vector<Mokinys> &Nuskriaustieji, Vector<int> &IrasuSk);
 };
 
 #endif
