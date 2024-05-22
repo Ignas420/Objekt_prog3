@@ -22,7 +22,7 @@ void Palyginimas()
     }
     
     chrono::duration<double> diff = chrono::high_resolution_clock::now() - start;
-    cout << "std :: vector push_back laikas su " << Dydziai[j] << " : " << diff.count() << endl;
+    cout << "std::vector push_back laikas su " << Dydziai[j] << " : " << diff.count() << endl;
 
     Vector<int> v2;
     size_t template_exchange = 0;
