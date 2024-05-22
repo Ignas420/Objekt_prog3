@@ -62,6 +62,7 @@ public:
     Vector(Vector&& other) noexcept;
     Vector& operator=(const Vector& other);
     Vector& operator=(Vector&& other) noexcept;
+    using value_type = T;
     ~Vector();
 
     void push_back(const T& value);
@@ -287,7 +288,7 @@ const T* Vector<T>::end() const {
 template<typename T>
 T& Vector<T>::back() {
     if (_size == 0) {
-        throw std::out_of_range("back() kvieciamas tusciui vektoriui");
+        throw std::out_of_range("Kvieciamas back() tusciam vektoriui");
     }
     return data[_size - 1];
 }
@@ -295,7 +296,7 @@ T& Vector<T>::back() {
 template<typename T>
 const T& Vector<T>::back() const {
     if (_size == 0) {
-        throw std::out_of_range("back() kvieciamas tusciui vektoriui");
+        throw std::out_of_range("Kvieciamas back() tusciam vektoriui");
     }
     return data[_size - 1];
 }
@@ -303,7 +304,7 @@ const T& Vector<T>::back() const {
 template<typename T>
 T& Vector<T>::front() {
     if (_size == 0) {
-        throw std::out_of_range("Calling front() on an empty vector");
+        throw std::out_of_range("Kvieciamas front() tusciam vektoriui");
     }
     return data[0];
 }
@@ -311,7 +312,7 @@ T& Vector<T>::front() {
 template<typename T>
 const T& Vector<T>::front() const {
     if (_size == 0) {
-        throw std::out_of_range("Calling front() on an empty vector");
+        throw std::out_of_range("Kvieciamas front() tusciam vektoriui");
     }
     return data[0];
 }
