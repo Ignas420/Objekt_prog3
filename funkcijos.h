@@ -3,11 +3,12 @@
 #include "mokinys.h"
 
 bool Patikrinimas(string kint);
-void GeneruotiFailus(vector<Mokinys>& Nuskriaustieji, vector<Mokinys>& Mokslinciai, vector<int>& IrasuSk, vector<Mokinys>& A);
+void GeneruotiFailus(Vector<Mokinys>& Nuskriaustieji, Vector<Mokinys>& Mokslinciai, Vector<int>& IrasuSk, Vector<Mokinys>& A);
 void testConstructor();
 void testCopyConstructor();
 void testMoveConstructor();
 void testCopyAssignment();
 void testMoveAssignment();
+void Palyginimas();
 
 #endif

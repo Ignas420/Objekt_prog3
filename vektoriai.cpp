@@ -8,10 +8,10 @@ int main()
     try
     {
         int n, m, kint;
-        vector<int> IrasuSk = {1000, 10000, 100000, 1000000, 10000000};
-        vector<Mokinys> A;
-        vector<Mokinys> Mokslinciai;
-        vector<Mokinys> Nuskriaustieji;
+        Vector<int> IrasuSk = {100000, 1000000, 10000000};
+        Vector<Mokinys> A;
+        Vector<Mokinys> Mokslinciai;
+        Vector<Mokinys> Nuskriaustieji;
         string eil;
         char input, input2, input3, input4;
 
@@ -26,6 +26,7 @@ int main()
             cout << "testMoveConstructor - 3" << endl;
             cout << "testCopyAssignment - 4" << endl;
             cout << "testMoveAssignment - 5" << endl;
+            cout << "test_Vector_vs_std::vector - 6" << endl;
             cin >> num;
             if (cin.fail())
                 throw runtime_error("Netinkama ivestis!");
@@ -45,6 +46,9 @@ int main()
                 break;
             case 5:
                 testMoveAssignment();
+                break;
+            case 6:
+                Palyginimas();
                 break;
             }
         }
@@ -122,7 +126,7 @@ int main()
 
                     sort(A[i].getND().begin(), A[i].getND().end());
 
-                    vector<int> temp = A[i].getND();
+                    Vector<int> temp = A[i].getND();
                     temp.push_back(A[i].getEgzaminas());
                     sort(temp.begin(), temp.end());
                     double median = temp[temp.size() / 2];
@@ -196,7 +200,7 @@ int main()
 
                     sort(A[i].getND().begin(), A[i].getND().end());
 
-                    vector<int> temp = A[i].getND();
+                    Vector<int> temp = A[i].getND();
                     temp.push_back(A[i].getEgzaminas());
                     sort(temp.begin(), temp.end());
                     double median = temp[temp.size() / 2];
