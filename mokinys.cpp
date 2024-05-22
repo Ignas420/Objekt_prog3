@@ -1,6 +1,54 @@
 #include "mokinys.h"
 #include "funkcijos.h"
 
+void Palyginimas()
+{
+    vector<int> Dydziai = {10000, 100000, 1000000, 10000000, 100000000};
+
+    for(int j = 0; j<Dydziai.size(); j++){
+
+    std::vector<int> v1;
+    size_t default_exchange = 0;
+    v1.clear();
+
+    auto start = chrono::high_resolution_clock::now();
+    auto st = start;
+
+    for (int i = 1; i <= Dydziai[j]; ++i){
+        v1.push_back(i);
+        if (v1.capacity() == v1.size()) {
+            default_exchange++;
+        }
+    }
+    
+    chrono::duration<double> diff = chrono::high_resolution_clock::now() - start;
+    cout << "std :: vector push_back laikas su " << Dydziai[j] << " : " << diff.count() << endl;
+
+    Vector<int> v2;
+    size_t template_exchange = 0;
+    v2.clear();
+
+    auto start1 = chrono::high_resolution_clock::now();
+    auto st1 = start1;
+
+    for (int i = 1; i <= Dydziai[j]; ++i){
+        v2.push_back(i);
+        if (v2.capacity() == v2.size()) {
+            template_exchange++;
+        }
+    }
+    
+    chrono::duration<double> diff1 = chrono::high_resolution_clock::now() - start1;
+    cout << "template Vector push_back laikas su " << Dydziai[j] << " : " << diff.count() << endl;
+    cout << endl;
+
+    if(Dydziai[j] == 100000000){
+        cout << "std::vector perskirstymu kiekis: " << default_exchange << endl;
+        cout << "template Vector perskirstymu kiekis: " << template_exchange << endl;
+    }
+}
+
+}
 bool Patikrinimas(string kint)
 {
     const int ilgis = kint.length();
@@ -15,7 +63,7 @@ bool Patikrinimas(string kint)
     return true;
 }
 
-void Mokinys ::Vidurkis(vector<Mokinys> &A)
+void Mokinys ::Vidurkis(Vector<Mokinys> &A)
 {
     for (int i = 0; i < A.size(); i++)
     {
@@ -52,7 +100,7 @@ bool Mokinys ::PagalPavarde(const Mokinys &a, const Mokinys &b)
 }
 
 double visasLaikas = 0.0;
-void GeneruotiFailus(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<int> &IrasuSk, vector<Mokinys> &A)
+void GeneruotiFailus(Vector<Mokinys> &Nuskriaustieji, Vector<Mokinys> &Mokslinciai, Vector<int> &IrasuSk, Vector<Mokinys> &A)
 {
     srand(time(NULL));
 
@@ -92,7 +140,7 @@ void GeneruotiFailus(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinci
         // Skaitymas(Nuskriaustieji, Mokslinciai, IrasuSk, filename, A, i);
     }
 }
-void Mokinys ::Skaitymas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<int> &IrasuSk, string failas, vector<Mokinys> &A, int &temp, char strategija)
+void Mokinys ::Skaitymas(Vector<Mokinys> &Nuskriaustieji, Vector<Mokinys> &Mokslinciai, Vector<int> &IrasuSk, string failas, Vector<Mokinys> &A, int &temp, char strategija)
 {
     visasLaikas = 0.0;
     string eil;
@@ -146,7 +194,7 @@ void Mokinys ::Skaitymas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Moksl
 
     cout << endl;
 }
-void Mokinys ::StudentuRusiavimas(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp)
+void Mokinys ::StudentuRusiavimas(Vector<Mokinys> &Nuskriaustieji, Vector<Mokinys> &Mokslinciai, Vector<Mokinys> &A, Vector<int> &IrasuSk, string failas, int &temp)
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
@@ -185,7 +233,7 @@ void Mokinys ::StudentuRusiavimas(vector<Mokinys> &Nuskriaustieji, vector<Mokiny
     // cout << "~Nuskriaustieji~" << endl;
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
-void Mokinys ::StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp)
+void Mokinys ::StudentuRusiavimas2(Vector<Mokinys> &Nuskriaustieji, Vector<Mokinys> &Mokslinciai, Vector<Mokinys> &A, Vector<int> &IrasuSk, string failas, int &temp)
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
@@ -225,7 +273,7 @@ void Mokinys ::StudentuRusiavimas2(vector<Mokinys> &Nuskriaustieji, vector<Mokin
     // cout << "~Nuskriaustieji~" << endl;
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
-void Mokinys ::StudentuRusiavimas3(vector<Mokinys> &Nuskriaustieji, vector<Mokinys> &Mokslinciai, vector<Mokinys> &A, vector<int> &IrasuSk, string failas, int &temp)
+void Mokinys::StudentuRusiavimas3(Vector<Mokinys> &Nuskriaustieji, Vector<Mokinys> &Mokslinciai, Vector<Mokinys> &A, Vector<int> &IrasuSk, string failas, int &temp)
 {
     string filename = "nuskriaustieji" + to_string(temp) + ".txt";
     string filename1 = "mokslinciai." + to_string(temp) + ".txt";
@@ -238,13 +286,15 @@ void Mokinys ::StudentuRusiavimas3(vector<Mokinys> &Nuskriaustieji, vector<Mokin
     cout << "Studentu rusiavimas didejimo tvarka uztruko: " << diff.count() << "s\n";
     visasLaikas += diff.count();
 
-    auto partition_point = partition(A.begin(), A.end(), [](const Mokinys &m)
-                                     { return m.VID < 5.0; });
+    auto partition_point = partition(A.begin(), A.end(), [](const Mokinys &m){
+        return m.VID < 5.0;
+    });
 
     auto start1 = chrono::high_resolution_clock::now();
 
+    size_t index = partition_point - A.begin();
     move(partition_point, A.end(), back_inserter(Nuskriaustieji));
-    A.erase(partition_point, A.end());
+    A.erase(index);
 
     chrono::duration<double> diff1 = chrono::high_resolution_clock::now() - start1;
     cout << "Studentu skirstymas uztruko: " << diff1.count() << "s\n";
@@ -255,7 +305,8 @@ void Mokinys ::StudentuRusiavimas3(vector<Mokinys> &Nuskriaustieji, vector<Mokin
     Isvedimas2(A, A.size(), filename);
     Isvedimas2(Nuskriaustieji, Nuskriaustieji.size(), filename1);
 }
-void Mokinys ::Isvedimas(const vector<Mokinys> &A, int MOK_kiekis, string isvedimas)
+
+void Mokinys ::Isvedimas(const Vector<Mokinys> &A, int MOK_kiekis, string isvedimas)
 {
     char kint;
     cout << "Rezultatus matyti norite ekrane ar faile?(e/f): ";
@@ -297,7 +348,7 @@ void Mokinys ::Isvedimas(const vector<Mokinys> &A, int MOK_kiekis, string isvedi
     else
         throw runtime_error("Netinkama ivestis!");
 }
-void Mokinys ::Isvedimas2(const vector<Mokinys> &A, int MOK_kiekis, string isvedimas)
+void Mokinys ::Isvedimas2(const Vector<Mokinys> &A, int MOK_kiekis, string isvedimas)
 {
     /*     auto start = chrono::high_resolution_clock::now();
         auto st = start;
@@ -316,7 +367,7 @@ void Mokinys ::Isvedimas2(const vector<Mokinys> &A, int MOK_kiekis, string isved
     /* chrono::duration<double> diff = chrono::high_resolution_clock::now() - start;
     cout << "Studentu isvedimas i failus uztruko: " << diff.count() << "s\n"; */
 }
-void Mokinys ::Rikiavimas(vector<Mokinys> &Mokslinciai, vector<Mokinys> &Nuskriaustieji, vector<int> &IrasuSk)
+void Mokinys ::Rikiavimas(Vector<Mokinys> &Mokslinciai, Vector<Mokinys> &Nuskriaustieji, Vector<int> &IrasuSk)
 {
     char kint;
     cout << "Pagal ka rikiuoti: varda, pavarde, vidurki, mediana?(v, p, V, m)" << endl;
@@ -346,7 +397,7 @@ void Mokinys ::Rikiavimas(vector<Mokinys> &Mokslinciai, vector<Mokinys> &Nuskria
 }
 void testConstructor()
 {
-    vector<int> temp{1, 2, 3, 4};
+    Vector<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
     assert(mok.getVardas() == "Vardenis");
     assert(mok.getPavarde() == "Pavardenis");
@@ -359,7 +410,7 @@ void testConstructor()
 
 void testCopyConstructor()
 {
-    vector<int> temp{1, 2, 3, 4};
+    Vector<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
     Mokinys mok1 = mok;
     assert(mok1.getVardas() == "Vardenis");
@@ -373,7 +424,7 @@ void testCopyConstructor()
 
 void testMoveConstructor()
 {
-    vector<int> temp{1, 2, 3, 4};
+    Vector<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
     Mokinys mok1 = move(mok);
     assert(mok1.getVardas() == "Vardenis");
@@ -388,7 +439,7 @@ void testMoveConstructor()
 
 void testMoveAssignment()
 {
-    vector<int> temp{1, 2, 3, 4};
+    Vector<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
     Mokinys mok1;
     mok1 = move(mok);
@@ -403,7 +454,7 @@ void testMoveAssignment()
 
 void testCopyAssignment()
 {
-    vector<int> temp{1, 2, 3, 4};
+    Vector<int> temp{1, 2, 3, 4};
     Mokinys mok("Vardenis", "Pavardenis", temp, 9, 8, 7);
     Mokinys mok1;
     mok1 = mok;
