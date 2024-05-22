@@ -18,6 +18,7 @@
 #include <initializer_list>
 #include <iterator>
 
+
 using namespace std;
 
 const char CRfv[] = "rezultatai.txt";
@@ -30,60 +31,81 @@ const char CDfv0[] = "studentai10000.txt";
 const char CDfv1[] = "studentai100000.txt";
 const char CDfv2[] = "studentai1000000.txt";
 
-template <typename T>
-class Vector
-{
+template<typename T>
+class Vector {
 private:
-    T *data;
+    T* data;
     size_t _size;
     size_t _capacity;
 
     void reallocate(size_t newCapacity);
 
-    template <typename InputIterator>
+    template<typename InputIterator>
     void assign_impl(InputIterator first, InputIterator last, std::input_iterator_tag);
 
-    template <typename RandomAccessIterator>
+    template<typename RandomAccessIterator>
     void assign_impl(RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag);
 
 public:
-    Vector(size_t size, size_t capacity, const T &defaultValue)
-        : _size(size), _capacity(capacity)
-    {
-        data = new T[_capacity];
-        for (size_t i = 0; i < _size; ++i)
-        {
-            data[i] = defaultValue;
-        }
+    Vector(size_t size, size_t capacity, const T& defaultValue)
+    : _size(size), _capacity(capacity) {
+    data = new T[_capacity];
+    for (size_t i = 0; i < _size; ++i) {
+        data[i] = defaultValue;
     }
+}
     Vector();
     explicit Vector(size_t initialCapacity);
-    Vector(size_t size, const T &defaultValue);
+    Vector(size_t size, const T& defaultValue);
     Vector(std::initializer_list<T> initList);
-    Vector(const Vector &other);
-    Vector(Vector &&other) noexcept;
-    Vector &operator=(const Vector &other);
-    Vector &operator=(Vector &&other) noexcept;
+    Vector(const Vector& other);
+    Vector(Vector&& other) noexcept;
+    Vector& operator=(const Vector& other);
+    Vector& operator=(Vector&& other) noexcept;
     ~Vector();
 
-    template <typename InputIterator>
+    void push_back(const T& value);
+    void push_back(T&& value);
+    void pop_back();
+    size_t size() const;
+    size_t capacity() const;
+    bool empty() const;
+    T& operator[](size_t index);
+    const T& operator[](size_t index) const;
+    void clear();
+    void reserve(size_t newCapacity);
+    T* begin();
+    T* end();
+    const T* begin() const;
+    const T* end() const;
+    T& back();
+    const T& back() const;
+    T& front();
+    const T& front() const;
+    T* data_ptr();
+    const T* data_ptr() const;
+    void erase(size_t index);
+    void resize(size_t newSize, const T& defaultValue = T());
+    void swap(Vector& other);
+
+    template<typename InputIterator>
     void assign(InputIterator first, InputIterator last);
-    void assign(size_t count, const T &value);
+    void assign(size_t count, const T& value);
     void assign(std::initializer_list<T> ilist);
 
-    void insert(size_t index, const T &value);
-    template <typename InputIterator>
+    void insert(size_t index, const T& value);
+    template<typename InputIterator>
     void insert_range(size_t index, InputIterator first, InputIterator last);
     void append_range(std::initializer_list<T> ilist);
 
-    T &at(size_t index);
-    const T &at(size_t index) const;
+    T& at(size_t index);
+    const T& at(size_t index) const;
 
-    typename std::reverse_iterator<T *> rbegin();
-    typename std::reverse_iterator<T *> rend();
-    typename std::reverse_iterator<const T *> rbegin() const;
-    typename std::reverse_iterator<const T *> rend() const;
-};
+    typename std::reverse_iterator<T*> rbegin();
+    typename std::reverse_iterator<T*> rend();
+    typename std::reverse_iterator<const T*> rbegin() const;
+    typename std::reverse_iterator<const T*> rend() const;
+}
 
 // Bazine ir Derived klases
 class Zmogus
@@ -116,7 +138,7 @@ public:
     // Destructor
     ~Mokinys() = default;
 
-    void patikrinimas() const override {};
+    void patikrinimas() const override{};
 
     // Copy constructor
     Mokinys(const Mokinys &other) : Zmogus(other), ND(other.ND), egzaminas(other.egzaminas), VID(other.VID), MED(other.MED) {}
@@ -138,8 +160,7 @@ public:
         return *this;
     }
 
-    void clear()
-    {
+    void clear() {
         vardas.clear();
         pavarde.clear();
         ND.clear();
@@ -149,10 +170,8 @@ public:
     }
 
     // Move Assignment Operator
-    Mokinys &operator=(Mokinys &&other) noexcept
-    {
-        if (this != &other)
-        {
+        Mokinys& operator=(Mokinys&& other) noexcept {
+        if (this != &other) {
             // Copy data from 'other' to 'this'
             vardas = std::move(other.vardas);
             pavarde = std::move(other.pavarde);
@@ -166,6 +185,7 @@ public:
         }
         return *this;
     }
+
 
     friend std::ostream &operator<<(std::ostream &fr, const Mokinys &temp1)
     {
@@ -204,6 +224,7 @@ public:
         fd >> temp1.VID;
         return fd;
     }
+    
 
     // Getter functions
     string getVardas() const { return vardas; }
