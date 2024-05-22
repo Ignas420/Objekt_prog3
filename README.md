@@ -86,15 +86,61 @@ Sukurta dar viena **bazine**, abstrakcioji klase, kuriai priklauso klase derived
 
 Per Doxygen HTML formatu sukurta dokumentacija bei padaryti Unit testai naudojant patogu C++ framework'a supratimui.
 
-**Kaip atrodo Doxygen dokumentacija:**
+**3.0**
 
-![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/dd0c14b6-ce8f-4a98-96fc-e10f8e265b1e)
+Sukurta template Vector klase, kuri is esmes atlieka tas pacias funkcijas kaip ir std::vector, istestuota su funkcijomis programoje bei catch2 unit testais (./test), paruostas diegimo failas
 
-**Unit testai:**
+**5 Naudojami metodai:**
 
-![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/3afb91e4-078b-4c5b-8399-01093ad1a483)
+**pop_back**
 
-![image](https://github.com/Ignas420/Objekt_prog2/assets/145566919/9dac1d72-0d8e-42e6-bffe-f9bd5660e572)
+![image](https://github.com/Ignas420/Objekt_prog3/assets/145566919/53ec21ab-59a5-4934-8dbb-938b8cad7da8)
+
+"pop_back" metodas salina paskutini vektoriaus elementa. Tai daroma sumazinant _size (vektoriaus dydi) vienetu, jei vektorius neturi jokiu elementu, nieko nedaroma.
+
+**reserve**
+
+![image](https://github.com/Ignas420/Objekt_prog3/assets/145566919/e6a47b50-b1bf-479a-82ed-51b008045ada)
+
+"reserve" metodas skirtas rezervuoti vieta vektoriuje, kad jame galetu buti saugomi tam tikro dydzio elementai, be naujos atminties isskirimo. Tai padidina vektoriaus talpa (capacity) iki nurodyto dydzio, jei jis mazesnis nei nurodytas dydis.
+
+**back**
+
+![image](https://github.com/Ignas420/Objekt_prog3/assets/145566919/b419907a-2224-4e1c-86ae-d83c0580e3c7)
+
+"back" metodas grazina nuoroda i paskutini vektoriaus elementa. Tai leidzia gauti prieiga prie paskutinio elemento, saugomo vektoriaus viduje, bet nedaro jokiu pakeitimu pries ta elementa.
+
+**front**
+
+![image](https://github.com/Ignas420/Objekt_prog3/assets/145566919/7e87c30b-aa13-4d49-a431-73694209edad)
+
+"front" metodas grazina nuoroda i pirmaji vektoriaus elementa. Tai leidzia gauti prieiga prie pirmo elemento, saugomo vektoriaus viduje, bet nedaro jokiu pakeitimu priesais si elementa.
+
+**erase**
+
+![image](https://github.com/Ignas420/Objekt_prog3/assets/145566919/9574a191-a903-49a7-bdef-1cbfe618501c)
+
+"erase" metodas istrina elementa is vektoriaus pagal nurodyta indeksa. Kai elementas yra istrinamas, visi vektoriaus elementai, kurie yra i desine nuo istrintojo, yra perkelti i kaire, kad uzimtu istrinto elemento vieta. Po sio veiksmo vektoriaus dydis sumazinamas vienetu.
+
+**Spartos analize su 10000, 100000, 1000000, 10000000 ir 100000000 int elementu ir atminties perskirstymai:**
+
+![image](https://github.com/Ignas420/Objekt_prog3/assets/145566919/75c14550-0ae6-4a6c-99fa-61df28fe3a8a)
+
+**Spartos analize su 100 000, 1 000 000 ir 10 000 000 studentu irasu:**
+
+| Konteinerio Tipas | Skaitymo Laikas (s) | Rusiavimo Laikas (s) | Skirstymo Laikas (s) | Visas Laikas (s) |
+|----------------|------------------|------------------|------------------------|----------------|
+| Vector su 100 000         | 0.0884473        | 0.017344         | 0.0116114              | 0.117403       |
+| Vector su 1 000 000       | 1.52174          | 0.247492         | 0.156395               | 1.92562        |
+| Vector  su 10 000 000       | 7.74136          | 3.02246          | 1.19803                | 11.9618        |
+| Average (Vector) | 3.117515       | 1.095432         | 0.455678               | 4.66894        |
+| std::vector su 100 000    | 0.072177         | 0.0153995        | 0.00548                | 0.0930565      |
+| std::vector su 1 000 000   | 1.22695          | 0.210847         | 0.0592042              | 1.497          |
+| std::vector su 10 000 000    | 6.17829          | 2.52657          | 0.465224               | 9.17009        |
+| Average (std::vector) | 2.492472       | 0.9172721667    | 0.1766368667          | 3.195382833    |
+
+
+
 
 
 
