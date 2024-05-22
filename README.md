@@ -124,7 +124,7 @@ Sukurta template Vector klase, kuri is esmes atlieka tas pacias funkcijas kaip i
 
 **Spartos analize su 10000, 100000, 1000000, 10000000 ir 100000000 int elementu ir atminties perskirstymai:**
 
-![image](https://github.com/Ignas420/Objekt_prog3/assets/145566919/75c14550-0ae6-4a6c-99fa-61df28fe3a8a)
+![image](https://github.com/Ignas420/Objekt_prog3/assets/145566919/32940120-1de0-4de6-b9ae-07d2c95f8c2c)
 
 **Spartos analize su 100 000, 1 000 000 ir 10 000 000 studentu irasu:**
 
