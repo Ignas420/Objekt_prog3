@@ -139,6 +139,108 @@ public:
     }
 };
 
+template<typename T>
+Vector<T>::Vector() : data(nullptr), _size(0), _capacity(0) {}
+
+template<typename T>
+Vector<T>::Vector(size_t initialCapacity) : _size(0), _capacity(initialCapacity) {
+    data = new T[_capacity];
+}
+
+template<typename T>
+Vector<T>::Vector(size_t size, const T& defaultValue) : _size(size), _capacity(size) {
+    data = new T[_capacity];
+    std::fill(data, data + _size, defaultValue);
+}
+
+template<typename T>
+Vector<T>::Vector(std::initializer_list<T> initList) : _size(initList.size()), _capacity(initList.size()) {
+    data = new T[_capacity];
+    std::copy(initList.begin(), initList.end(), data);
+}
+
+template<typename T>
+Vector<T>::Vector(const Vector& other) : _size(other._size), _capacity(other._capacity) {
+    data = new T[_capacity];
+    std::copy(other.data, other.data + _size, data);
+}
+
+template<typename T>
+Vector<T>::Vector(Vector&& other) noexcept : data(other.data), _size(other._size), _capacity(other._capacity) {
+    other.data = nullptr;
+    other._size = 0;
+    other._capacity = 0;
+}
+
+template<typename T>
+Vector<T>& Vector<T>::operator=(const Vector& other) {
+    if (this != &other) {
+        T* newData = new T[other._capacity];
+        std::copy(other.data, other.data + other._size, newData);
+        delete[] data;
+        data = newData;
+        _size = other._size;
+        _capacity = other._capacity;
+    }
+    return *this;
+}
+
+template<typename T>
+Vector<T>& Vector<T>::operator=(Vector&& other) noexcept {
+    if (this != &other) {
+        delete[] data;
+        data = other.data;
+        _size = other._size;
+        _capacity = other._capacity;
+        other.data = nullptr;
+        other._size = 0;
+        other._capacity = 0;
+    }
+    return *this;
+}
+
+template<typename T>
+Vector<T>::~Vector() {
+    delete[] data;
+}
+
+template<typename T>
+void Vector<T>::push_back(const T& value) {
+    if (_size == _capacity) {
+        reallocate(_capacity == 0 ? 1 : _capacity * 2);
+    }
+    data[_size++] = value;
+}
+
+template<typename T>
+void Vector<T>::push_back(T&& value) {
+    if (_size == _capacity) {
+        reallocate(_capacity == 0 ? 1 : _capacity * 2);
+    }
+    data[_size++] = std::move(value);
+}
+
+template<typename T>
+void Vector<T>::pop_back() {
+    if (_size > 0) {
+        --_size;
+    }
+}
+
+template<typename T>
+size_t Vector<T>::size() const {
+    return _size;
+}
+
+template<typename T>
+size_t Vector<T>::capacity() const {
+    return _capacity;
+}
+
+template<typename T>
+bool Vector<T>::empty() const {
+    return _size == 0;
+}
 
 // Bazine ir Derived klases
 class Zmogus
