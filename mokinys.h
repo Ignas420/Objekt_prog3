@@ -242,6 +242,49 @@ bool Vector<T>::empty() const {
     return _size == 0;
 }
 
+template<typename T>
+T& Vector<T>::operator[](size_t index) {
+    return data[index];
+}
+
+template<typename T>
+const T& Vector<T>::operator[](size_t index) const {
+    return data[index];
+}
+
+template<typename T>
+void Vector<T>::clear() {
+    _size = 0;
+}
+
+template<typename T>
+void Vector<T>::reserve(size_t newCapacity) {
+    if (newCapacity > _capacity) {
+        reallocate(newCapacity);
+    }
+}
+
+template<typename T>
+T* Vector<T>::begin() {
+    return data;
+}
+
+template<typename T>
+T* Vector<T>::end() {
+    return data + _size;
+}
+
+template<typename T>
+const T* Vector<T>::begin() const {
+    return data;
+}
+
+template<typename T>
+const T* Vector<T>::end() const {
+    return data + _size;
+}
+
+
 // Bazine ir Derived klases
 class Zmogus
 {
