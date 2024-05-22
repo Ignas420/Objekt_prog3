@@ -326,7 +326,31 @@ const T* Vector<T>::data_ptr() const {
     return data;
 }
 
+template<typename T>
+void Vector<T>::erase(size_t index) {
+    if (index < _size) {
+        std::move(data + index + 1, data + _size, data + index);
+        --_size;
+    }
+}
 
+template<typename T>
+void Vector<T>::resize(size_t newSize, const T& defaultValue) {
+    if (newSize > _capacity) {
+        reallocate(newSize);
+    }
+    if (newSize > _size) {
+        std::fill(data + _size, data + newSize, defaultValue);
+    }
+    _size = newSize;
+}
+
+template<typename T>
+void Vector<T>::swap(Vector& other) {
+    std::swap(data, other.data);
+    std::swap(_size, other._size);
+    std::swap(_capacity, other._capacity);
+}
 
 // Bazine ir Derived klases
 class Zmogus
