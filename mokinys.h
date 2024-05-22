@@ -38,6 +38,14 @@ private:
     size_t _size;
     size_t _capacity;
 
+    void reallocate(size_t newCapacity);
+
+    template <typename InputIterator>
+    void assign_impl(InputIterator first, InputIterator last, std::input_iterator_tag);
+
+    template <typename RandomAccessIterator>
+    void assign_impl(RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag);
+
 public:
     Vector(size_t size, size_t capacity, const T &defaultValue)
         : _size(size), _capacity(capacity)
@@ -49,6 +57,32 @@ public:
         }
     }
     Vector();
+    explicit Vector(size_t initialCapacity);
+    Vector(size_t size, const T &defaultValue);
+    Vector(std::initializer_list<T> initList);
+    Vector(const Vector &other);
+    Vector(Vector &&other) noexcept;
+    Vector &operator=(const Vector &other);
+    Vector &operator=(Vector &&other) noexcept;
+    ~Vector();
+
+    template <typename InputIterator>
+    void assign(InputIterator first, InputIterator last);
+    void assign(size_t count, const T &value);
+    void assign(std::initializer_list<T> ilist);
+
+    void insert(size_t index, const T &value);
+    template <typename InputIterator>
+    void insert_range(size_t index, InputIterator first, InputIterator last);
+    void append_range(std::initializer_list<T> ilist);
+
+    T &at(size_t index);
+    const T &at(size_t index) const;
+
+    typename std::reverse_iterator<T *> rbegin();
+    typename std::reverse_iterator<T *> rend();
+    typename std::reverse_iterator<const T *> rbegin() const;
+    typename std::reverse_iterator<const T *> rend() const;
 };
 
 // Bazine ir Derived klases
