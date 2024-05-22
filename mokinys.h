@@ -352,6 +352,54 @@ void Vector<T>::swap(Vector& other) {
     std::swap(_capacity, other._capacity);
 }
 
+template<typename T>
+template<typename InputIterator>
+void Vector<T>::assign(InputIterator first, InputIterator last) {
+    using category = typename std::iterator_traits<InputIterator>::iterator_category;
+    assign_impl(first, last, category());
+}
+
+template<typename T>
+template<typename InputIterator>
+void Vector<T>::assign_impl(InputIterator first, InputIterator last, std::input_iterator_tag) {
+    clear();
+    for (; first != last; ++first) {
+        push_back(*first);
+    }
+}
+
+template<typename T>
+template<typename RandomAccessIterator>
+void Vector<T>::assign_impl(RandomAccessIterator first, RandomAccessIterator last, std::random_access_iterator_tag) {
+    size_t newSize = std::distance(first, last);
+    if (newSize > _capacity) {
+        reallocate(newSize);
+    }
+    std::copy(first, last, data);
+    _size = newSize;
+}
+
+template<typename T>
+void Vector<T>::assign(std::initializer_list<T> ilist) {
+    size_t newSize = ilist.size();
+    if (newSize > _capacity) {
+        reallocate(newSize);
+    }
+    std::copy(ilist.begin(), ilist.end(), data);
+    _size = newSize;
+}
+
+template<typename T>
+void Vector<T>::assign(size_t count, const T& value) {
+    size_t newSize = count;
+    if (newSize > _capacity) {
+        reallocate(newSize);
+    }
+    std::fill_n(data, count, value);
+    _size = count;
+}
+
+
 // Bazine ir Derived klases
 class Zmogus
 {
